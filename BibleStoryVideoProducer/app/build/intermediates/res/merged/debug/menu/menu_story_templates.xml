@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.bsv.www.biblestoryvideoproducer.StoryTemplates">
+    <item android:id="@+id/menu_search"
+        android:title="@string/menu_search"
+        android:icon="@drawable/ic_search"
+        android:showAsAction="ifRoom"/>
+    <item android:id="@+id/menu_info"
+        android:title="@string/menu_info"
+        android:icon="@drawable/ic_info"/>
+</menu>
+<!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/src/main/res/menu/menu_story_templates.xml -->

@@ -20,6 +20,10 @@
             android:name=".StoryTemplates"
             android:label="@string/title_activity_story_templates" >
         </activity>
+        <activity
+            android:name=".InfoPage"
+            android:label="@string/title_activity_info_page" >
+        </activity>
     </application>
 
 </manifest>

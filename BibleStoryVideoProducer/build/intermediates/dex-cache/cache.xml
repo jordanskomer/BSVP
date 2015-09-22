@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Jordan Skomer\AndroidStudioProjects\BibleStoryVideoProducer\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="4fcf0b1879f8caf497c073e1432d398e9e2988c1">
-        <dex dex="C:\Users\Jordan Skomer\AndroidStudioProjects\BibleStoryVideoProducer\app\build\intermediates\pre-dexed\debug\classes-37ffe126438acc2f892c6b4bc443eeca34ec8e28.jar" />
-    </item>
-    <item
-        jar="C:\Users\Jordan Skomer\AndroidStudioProjects\BibleStoryVideoProducer\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\jars\libs\internal_impl-23.0.0.jar"
+        jar="C:\Users\SupDiggity\Documents\GitHub\BSVP\BibleStoryVideoProducer\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\jars\libs\internal_impl-23.0.0.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
-        <dex dex="C:\Users\Jordan Skomer\AndroidStudioProjects\BibleStoryVideoProducer\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.0-d704fd1253a9c7cc33a53d4ea12b1666a46059bf.jar" />
+        <dex dex="C:\Users\SupDiggity\Documents\GitHub\BSVP\BibleStoryVideoProducer\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.0-89b78970258b511e474130f9c044397ddf82c055.jar" />
     </item>
     <item
-        jar="C:\Users\Jordan Skomer\AndroidStudioProjects\BibleStoryVideoProducer\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="8413c27b45b7fe61dca4a98159f65e2cee215f5a">
-        <dex dex="C:\Users\Jordan Skomer\AndroidStudioProjects\BibleStoryVideoProducer\app\build\intermediates\pre-dexed\debug\classes-169f38b75401773fd95d676bced7a782659c9d4a.jar" />
-    </item>
-    <item
-        jar="C:\Users\Jordan Skomer\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.0\support-annotations-23.0.0.jar"
+        jar="C:\Users\SupDiggity\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.0\support-annotations-23.0.0.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="990e7f98a7bad86a40b1f0bcfeb039023afd0839">
-        <dex dex="C:\Users\Jordan Skomer\AndroidStudioProjects\BibleStoryVideoProducer\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.0-2ac0872805a8552bcc55508b6ab37bb2f9a79963.jar" />
+        <dex dex="C:\Users\SupDiggity\Documents\GitHub\BSVP\BibleStoryVideoProducer\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.0-d798dc5e3de028cee70667c02b1b4713a466d145.jar" />
+    </item>
+    <item
+        jar="C:\Users\SupDiggity\Documents\GitHub\BSVP\BibleStoryVideoProducer\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="8413c27b45b7fe61dca4a98159f65e2cee215f5a">
+        <dex dex="C:\Users\SupDiggity\Documents\GitHub\BSVP\BibleStoryVideoProducer\app\build\intermediates\pre-dexed\debug\classes-4e3f5e9fc2cc29ea140bd4c2e8013bb9f1668bdc.jar" />
+    </item>
+    <item
+        jar="C:\Users\SupDiggity\Documents\GitHub\BSVP\BibleStoryVideoProducer\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="4fcf0b1879f8caf497c073e1432d398e9e2988c1">
+        <dex dex="C:\Users\SupDiggity\Documents\GitHub\BSVP\BibleStoryVideoProducer\app\build\intermediates\pre-dexed\debug\classes-989ff84589d4d227a4630f3947ee4bcf242fd534.jar" />
     </item>
 
 </items>

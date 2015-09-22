@@ -26,6 +26,10 @@
             android:name="com.bsv.www.biblestoryvideoproducer.StoryTemplates"
             android:label="@string/title_activity_story_templates" >
         </activity>
+        <activity
+            android:name="com.bsv.www.biblestoryvideoproducer.InfoPage"
+            android:label="@string/title_activity_info_page" >
+        </activity>
     </application>
 
 </manifest>

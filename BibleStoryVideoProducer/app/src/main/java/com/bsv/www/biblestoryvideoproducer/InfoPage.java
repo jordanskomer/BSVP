@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class InfoPage extends AppCompatActivity {
 
@@ -15,7 +16,8 @@ public class InfoPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_page);
 
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        getInfo();
+
     }
 
     @Override
@@ -40,6 +42,32 @@ public class InfoPage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void getInfo() {
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        /*set the text for each of the different textview ids*/
+        String contents = getResources().getString(R.string.setup_langcode_hint, "");
+        TextView chooseView = (TextView) findViewById(R.id.lcode_tv);
+        chooseView.setText(contents);
+        contents = getResources().getString(R.string.setup_countries_hint, "");
+        chooseView = (TextView) findViewById(R.id.country_tv);
+        chooseView.setText(contents);
+        contents = getResources().getString(R.string.setup_consemail_hint, "");
+        chooseView = (TextView) findViewById(R.id.cemail_tv);
+        chooseView.setText(contents);
+        contents = getResources().getString(R.string.setup_consname_hint, "");
+        chooseView = (TextView) findViewById(R.id.cname_tv);
+        chooseView.setText(contents);
+        contents = getResources().getString(R.string.setup_consphone_hint, "");
+        chooseView = (TextView) findViewById(R.id.cphone_tv);
+        chooseView.setText(contents);
+        contents = getResources().getString(R.string.setup_teamcontact_hint, "");
+        chooseView = (TextView) findViewById(R.id.tcontact_tw);
+        chooseView.setText(contents);
+        contents = getResources().getString(R.string.setup_teamname_hint, "");
+        chooseView = (TextView) findViewById(R.id.tname_tw);
+        chooseView.setText(contents);
+
+    }
 
 
 }

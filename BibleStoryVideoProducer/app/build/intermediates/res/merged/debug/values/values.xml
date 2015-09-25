@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
@@ -41,11 +41,11 @@
     <color name="highlighted_text_material_light">#66009688</color>
     <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark</color>
     <color name="hint_foreground_material_light">@color/bright_foreground_disabled_material_light</color>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="lightBlue">#bde5f2</color>
     <color name="lightGray">#d3d3d3</color>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
     <eat-comment/>
     <color name="material_blue_grey_800">#ff37474f</color>
     <color name="material_blue_grey_900">#ff263238</color>
@@ -59,12 +59,12 @@
     <color name="material_grey_800">#ff424242</color>
     <color name="material_grey_850">#ff303030</color>
     <color name="material_grey_900">#ff212121</color>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="navBar">#d1d2d4</color>
     <color name="primary">#43b3e6</color>
     <color name="primaryDark">#2c97d4</color>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
     <eat-comment/>
     <color name="primary_dark_material_dark">@android:color/black</color>
     <color name="primary_dark_material_light">@color/material_grey_600</color>
@@ -80,16 +80,16 @@
     <color name="secondary_text_default_material_light">#8a000000</color>
     <color name="secondary_text_disabled_material_dark">#36ffffff</color>
     <color name="secondary_text_disabled_material_light">#24000000</color>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="setupBG">#43b3e6</color>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
     <eat-comment/>
     <color name="switch_thumb_disabled_material_dark">#ff616161</color>
     <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="textDark">#404041</color>
     <color name="white">#ffffff</color>
@@ -120,7 +120,7 @@
     <declare-styleable name="View"><attr format="dimension" name="paddingStart"/><attr format="dimension" name="paddingEnd"/><attr name="android:focusable"/><attr format="reference" name="theme"/><attr name="android:theme"/></declare-styleable>
     <declare-styleable name="ViewBackgroundHelper"><attr name="android:background"/><attr format="color" name="backgroundTint"/><attr name="backgroundTintMode"><enum name="src_over" value="3"/><enum name="src_in" value="5"/><enum name="src_atop" value="9"/><enum name="multiply" value="14"/><enum name="screen" value="15"/></attr></declare-styleable>
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
@@ -182,11 +182,11 @@
     <dimen name="abc_text_size_subtitle_material_toolbar">16dp</dimen>
     <dimen name="abc_text_size_title_material">20sp</dimen>
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">30dp</dimen>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
     <eat-comment/>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
     <item name="dialog_fixed_height_minor" type="dimen">100%</item>
@@ -200,12 +200,12 @@
     <dimen name="notification_large_icon_height">64dp</dimen>
     <dimen name="notification_large_icon_width">64dp</dimen>
     <dimen name="notification_subtext_size">12dp</dimen>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="setup_edittext_paddingLefRig">30dp</dimen>
     <dimen name="setup_edittext_paddingTopBot">20dp</dimen>
     <dimen name="setup_edittext_width">300dp</dimen>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
     <eat-comment/>
     <drawable name="notification_template_icon_bg">#3333B5E5</drawable>
     <item name="action_bar_activity_content" type="id"/>
@@ -239,10 +239,17 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Settings</string>
     <string name="app_name">Bible Story Video Producer</string>
+    <string name="consultant_email">"Consultant Email:  "</string>
+    <string name="consultant_name">"Consultant Name:  "</string>
+    <string name="consultant_phone">"Consultant Phone:  "</string>
+    <string name="country">"Country:  "</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="language">"Language:  "</string>
+    <string name="language_code">"Language Code:  "</string>
     <string name="menu_info">Registration Info</string>
     <string name="menu_search">Search</string>
     <string name="setup_consemail_hint">Consultant Email</string>
@@ -252,24 +259,27 @@
     <string name="setup_langcode_hint">Language Code</string>
     <string name="setup_teamcontact_hint">Contact Name</string>
     <string name="setup_teamname_hint">Team Name</string>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
     <eat-comment/>
     <string name="status_bar_notification_info_overflow">999+</string>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="title_activity_info_page">InfoPage</string>
     <string name="title_activity_story_templates">StoryTemplates</string>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/src/main/res/values/styles.xml -->
+    <string name="translator_contact_name">"Translation Team Contact:  "</string>
+    <string name="translator_team_name">"Translation Team Name:  "</string>
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
         <item name="android:background">@color/primary</item>
     </style>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
     <eat-comment/>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>
     <style name="Animation.AppCompat.DropDownUp" parent="Base.Animation.AppCompat.DropDownUp"/>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
         <item name="android:colorPrimary">@color/primary</item>
@@ -277,7 +287,7 @@
         <item name="android:colorBackground">@color/primary</item>
         <item name="android:actionBarStyle">@style/ActionBarStyle</item>
     </style>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Base.AlertDialog.AppCompat" parent="android:Widget">
         <item name="android:layout">@layout/abc_alert_dialog_material</item>
@@ -1517,7 +1527,7 @@
     <style name="Widget.AppCompat.TextView.SpinnerItem" parent="Base.Widget.AppCompat.TextView.SpinnerItem"/>
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar"/>
     <style name="Widget.AppCompat.Toolbar.Button.Navigation" parent="Base.Widget.AppCompat.Toolbar.Button.Navigation"/>
-    <!-- From: file:/C:/Users/Jordan%20Skomer/AndroidStudioProjects/BibleStoryVideoProducer/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/SupDiggity/Documents/GitHub/BSVP/BibleStoryVideoProducer/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="setupEditText">
         <item name="android:background">@null</item>

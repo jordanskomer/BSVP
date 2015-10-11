@@ -39,4 +39,8 @@
         <item>@drawable/ic_consultant</item>
         <item>@drawable/ic_mic_white</item>
     </array>
+
+    /* ListView */
+    <string name="playVideo">Play</string>
+    <string name="translateVideo">Translate</string>
 </resources>

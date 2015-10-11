@@ -39,7 +39,7 @@ public class ListViewStories extends Activity{
         //TODO Images for listview
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                R.layout.activity_menu_list, R.id.title, values);
+                R.layout.activity_menu_list, R.id.videoTitle, values);
 
 
         // Assign adapter to ListView

@@ -6,4 +6,8 @@
     <dimen name="setup_edittext_paddingTopBot">20dp</dimen>
     <dimen name="setup_edittext_paddingLefRig">30dp</dimen>
     <dimen name="nav_drawer_width">280dp</dimen>
+
+    <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
+         https://developer.android.com/design/patterns/navigation-drawer.html -->
+    <dimen name="navigation_drawer_width">240dp</dimen>
 </resources>

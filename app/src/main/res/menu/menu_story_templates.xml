@@ -7,8 +7,5 @@
         android:icon="@drawable/ic_search"
         app:showAsAction="always"
        />
-    <item android:id="@+id/menu_info"
-        android:title="@string/menu_info"
-        android:icon="@drawable/ic_info"
-        app:showAsAction="always"/>
+ 
 </menu>

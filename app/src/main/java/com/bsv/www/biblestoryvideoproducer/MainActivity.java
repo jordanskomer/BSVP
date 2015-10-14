@@ -1,5 +1,6 @@
 package com.bsv.www.biblestoryvideoproducer;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -16,49 +17,20 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class StoryTemplates extends AppCompatActivity {
-    private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private DrawerLayout mDrawerLayout;
-    private ArrayList<NavItem> mNavItems = new ArrayList<>();
-
+public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_story_templates);
-        String[] aNavTitles = getResources().getStringArray(R.array.nav_labels);
-        TypedArray aNavIcons = getResources().obtainTypedArray(R.array.nav_icons);
-        final String mActivityTitle = getTitle().toString();
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.nav_layout);
-        mDrawerList = (ListView) findViewById(R.id.nav_list);
-
-        for (int i = 0; i < aNavTitles.length; i++) {
-            mNavItems.add(new NavItem(aNavTitles[i], aNavIcons.getResourceId(i, -1)));
+        setContentView(R.layout.activity_main);
+        setupNavDrawer();
+        if(findViewById(R.id.fragment_container) != null){
+            if(savedInstanceState != null){
+                return;
+            }
+            StoryTemplatesFrag storyFrag = new StoryTemplatesFrag();
+            storyFrag.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, storyFrag).commit();
         }
-        aNavIcons.recycle();
-
-        NavItemAdapter adapter = new NavItemAdapter(getApplicationContext(), mNavItems);
-        mDrawerList.setAdapter(adapter);
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                getSupportActionBar().setTitle(mActivityTitle);
-                invalidateOptionsMenu();
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle("Pages");
-                invalidateOptionsMenu();
-            }
-        };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
     @Override
@@ -99,7 +71,11 @@ public class StoryTemplates extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
     }
 
-    //CREATED CLASSES
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+    private ArrayList<NavItem> mNavItems = new ArrayList<>();
+
     private void setupNavDrawer(){
         String[] aNavTitles = getResources().getStringArray(R.array.nav_labels);
         TypedArray aNavIcons = getResources().obtainTypedArray(R.array.nav_icons);
@@ -112,8 +88,11 @@ public class StoryTemplates extends AppCompatActivity {
         }
         aNavIcons.recycle();
 
-        NavItemAdapter adapter = new NavItemAdapter(this, mNavItems);
+        NavItemAdapter adapter = new NavItemAdapter(getApplicationContext(), mNavItems);
         mDrawerList.setAdapter(adapter);
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
@@ -130,23 +109,34 @@ public class StoryTemplates extends AppCompatActivity {
                 invalidateOptionsMenu();
             }
         };
-        mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
     }
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Toast.makeText(StoryTemplates.this, Integer.toString(position), Toast.LENGTH_SHORT).show();
-//            displayView(position);
+//            Toast.makeText(MainActivity.this, Integer.toString(position), Toast.LENGTH_SHORT).show();
+            startFragment(position);
             mDrawerLayout.closeDrawer(mDrawerList);
         }
     }
-    protected void displayView(int pos){
-        switch (pos){
+
+    protected void startFragment(int iFragNum){
+
+        switch (iFragNum) {
+            case 0:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StoryTemplatesFrag()).commit();
+                break;
             case 1:
-                Intent intent = new Intent(StoryTemplates.this, InfoPage.class);
-                startActivity(intent);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TransFrag()).commit();
+                break;
+            case 2:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ComCheckFrag()).commit();
+                break;
+            case 3:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConCheckFrag()).commit();
+                break;
+
         }
     }
 

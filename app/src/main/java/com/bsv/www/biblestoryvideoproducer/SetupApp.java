@@ -6,17 +6,12 @@ import android.content.SharedPreferences;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ActionMenuView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -85,7 +80,7 @@ public class SetupApp extends AppCompatActivity {
                     }
                     if(actionId == EditorInfo.IME_ACTION_DONE){
                         Intent intent;
-                        intent = new Intent(getApplicationContext(), StoryTemplates.class);
+                        intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                     }
                     return false;

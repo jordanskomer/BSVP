@@ -14,17 +14,17 @@
         </activity>
         <!-- Story List Page -->
         <activity
-            android:name=".StoryTemplates"
+            android:name=".MainActivity"
             android:label="@string/title_activity_story_templates" >
         </activity>
         <!-- Info Page -->
         <activity
             android:name=".InfoPage"
             android:label="@string/title_activity_info_page"
-            android:parentActivityName=".StoryTemplates" >
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".StoryTemplates" />
+                android:value=".MainActivity" />
         </activity>
         <!-- Splash Screen -->
         <activity

@@ -7,7 +7,7 @@
         <item name="android:colorBackground">@color/primary</item>
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:textColorPrimary">@android:color/white</item>
-        <item name="android:textColor">@color/darkGrey</item>
+        <item name="android:textColor">@color/darkGray</item>
         <!--<item name="android:windowActionBar">false</item>-->
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>

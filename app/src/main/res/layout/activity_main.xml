@@ -21,14 +21,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <!-- content -->
-       <FrameLayout
+       <RelativeLayout
            android:id="@+id/fragment_container"
            android:layout_width="match_parent"
-           android:layout_height="match_parent"/>
+           android:layout_height="match_parent">
+           </RelativeLayout>
         <!-- drawer view -->
         <ListView
             android:id="@+id/nav_list"
-            android:layout_width="@dimen/nav_drawer_width"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="@dimen/nav_drawer_margin"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:choiceMode="singleChoice"

@@ -1,6 +1,5 @@
 package com.bsv.www.biblestoryvideoproducer;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -13,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,14 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupNavDrawer();
-        if(findViewById(R.id.fragment_container) != null){
-            if(savedInstanceState != null){
-                return;
-            }
-            StoryTemplatesFrag storyFrag = new StoryTemplatesFrag();
-            storyFrag.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, storyFrag).commit();
-        }
     }
 
     @Override
@@ -125,16 +115,16 @@ public class MainActivity extends AppCompatActivity {
 
         switch (iFragNum) {
             case 0:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StoryTemplatesFrag()).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StoryTemplatesFrag()).commit();
                 break;
             case 1:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TransFrag()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, PagerFrag.newInstance(5)).commit();
                 break;
             case 2:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ComCheckFrag()).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ComCheckFrag()).commit();
                 break;
             case 3:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConCheckFrag()).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConCheckFrag()).commit();
                 break;
 
         }

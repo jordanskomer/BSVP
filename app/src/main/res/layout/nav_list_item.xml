@@ -24,7 +24,7 @@
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:textColor="@color/white"
         android:gravity="center_vertical"
-        android:paddingRight="40dp"/>
+        android:paddingRight="72dp"/>
 
 
 </RelativeLayout>

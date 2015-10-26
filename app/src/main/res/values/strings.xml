@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bible Story Video Producer</string>
+    <string name="app_name">Story Producer</string>
     <string name="action_settings">Settings</string>
     <string name="menu_info">Registration Info</string>
     <string name="menu_search">Search</string>
@@ -12,6 +12,7 @@
     <string name="setup_consemail_hint">Consultant Email</string>
     <string name="title_activity_story_templates">Story Templates</string>
     <string name="title_activity_info_page">Information</string>
+    <string name="trans_menu_title">Translate</string>
 
     /*String names for Info Page*/
     <string name="consultant_phone">"Consultant Phone:  "</string>
@@ -40,7 +41,12 @@
         <item>@drawable/ic_mic_white</item>
     </array>
 
+
     /* ListView */
     <string name="playVideo">Play</string>
     <string name="translateVideo">Translate</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_splash_screen">Story Producer</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

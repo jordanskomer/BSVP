@@ -1,6 +1,7 @@
 package com.bsv.www.biblestoryvideoproducer;
 
 import android.app.Dialog;
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,6 +30,8 @@ public class TransFrag extends Fragment {
     private MediaRecorder audioRecorder;
     private static final String SLIDE_NUM = "slidenum";
     private static final String NUM_OF_SLIDES = "numofslide";
+    private String outputFile=null;
+    private String fileName = "recording.mp3";
 
     public static TransFrag newInstance(int position, int numOfSlides){
         TransFrag frag = new TransFrag();
@@ -50,10 +53,10 @@ public class TransFrag extends Fragment {
                              Bundle savedInstanceState) {
 //        getActivity().getActionBar().setTitle(R.string.trans_menu_title);
         // Inflate the layout for this fragment
-        ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fragment_trans, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_trans, container, false);
 //        Snackbar.make(getActivity().getCurrentFocus(), "TEST", Snackbar.LENGTH_LONG).show();
 
-    //Change Slide Number and add on click
+        //Change Slide Number and add on click
         TextView slideNum = (TextView)view.findViewById(R.id.trans_slide_indicator);
         slideNum.setText("#" + (getArguments().getInt(SLIDE_NUM) + 1));
         slideNum.setOnClickListener(new View.OnClickListener() {
@@ -62,18 +65,67 @@ public class TransFrag extends Fragment {
                 launchSlideSelectDialog();
             }
         });
-        FloatingActionButton floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
-        floatingActionButton.setOnLongClickListener(new View.OnLongClickListener() {
+        //stuff for saving and playing the audio
+        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath();
+        outputFile += "/" + fileName;
+        com.getbase.floatingactionbutton.FloatingActionButton floatingActionButton1 = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.trans_record);
+        floatingActionButton1.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onLongClick(View v) {
-                audioRecorder = createAudioRecorder("recording");
-                startAudioRecorder(audioRecorder);
-                Snackbar.make(v, "Recording...", Snackbar.LENGTH_SHORT).show();
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch (event.getAction() & MotionEvent.ACTION_MASK) {
+
+                    case MotionEvent.ACTION_DOWN:
+//                        v.setPressed(true);
+                        audioRecorder = createAudioRecorder(outputFile);
+                        startAudioRecorder(audioRecorder);
+                        Toast.makeText(getContext(), "Recording Started", Toast.LENGTH_LONG).show();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_OUTSIDE:
+                    case MotionEvent.ACTION_CANCEL:
+                        Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_LONG).show();
+                        stopAudioRecorder(audioRecorder);
+                        break;
+                    case MotionEvent.ACTION_POINTER_DOWN:
+                        break;
+                    case MotionEvent.ACTION_POINTER_UP:
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        break;
+
+                }
                 return true;
             }
         });
+
+        com.getbase.floatingactionbutton.FloatingActionButton floatingActionButton2 = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.trans_play);
+        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaPlayer m = new MediaPlayer();
+
+                try {
+                    m.setDataSource(outputFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    m.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                m.start();
+                Toast.makeText(getContext(), "Playing Audio", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
         return view;
     }
+
 
     private void startAudioRecorder(MediaRecorder recorder){
         try {
@@ -86,26 +138,26 @@ public class TransFrag extends Fragment {
     private void stopAudioRecorder(MediaRecorder recorder){
         recorder.stop();
         recorder.release();
+        recorder = null;
     }
     private MediaRecorder createAudioRecorder(String fileName){
         MediaRecorder mediaRecorder = new MediaRecorder();
-        String outputFile = Environment.getExternalStorageDirectory().getAbsolutePath();
-        outputFile += "/" + fileName;
 
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        mediaRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
+        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
         mediaRecorder.setOutputFile(outputFile);
 
         return  mediaRecorder;
     }
-    private void launchSlideSelectDialog(){
+
+    private void launchSlideSelectDialog() {
         final Dialog dialog = new Dialog(getContext());
         int[] slides = new int[getArguments().getInt(NUM_OF_SLIDES)];
-        for(int i=0; i<getArguments().getInt(NUM_OF_SLIDES); i++){
-            slides[i] = (i+1);
+        for (int i = 0; i < getArguments().getInt(NUM_OF_SLIDES); i++) {
+            slides[i] = (i + 1);
         }
-        final DialogListAdapter dialogListAdapter = new DialogListAdapter(getActivity(),slides, getArguments().getInt(SLIDE_NUM));
+        final DialogListAdapter dialogListAdapter = new DialogListAdapter(getActivity(), slides, getArguments().getInt(SLIDE_NUM));
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_slide_indicator);
         ListView listView = (ListView)dialog.findViewById(R.id.dialog_listview);

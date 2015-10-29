@@ -5,7 +5,7 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
@@ -138,7 +138,7 @@ public class TransFrag extends Fragment {
     private void stopAudioRecorder(MediaRecorder recorder){
         recorder.stop();
         recorder.release();
-        recorder = null;
+        //recorder = null;
     }
     private MediaRecorder createAudioRecorder(String fileName){
         MediaRecorder mediaRecorder = new MediaRecorder();

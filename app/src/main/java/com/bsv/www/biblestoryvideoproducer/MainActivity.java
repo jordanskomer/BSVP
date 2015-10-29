@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         setupNavDrawer();
     }
 
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             mDrawerLayout.closeDrawer(mDrawerList);
         }
     }
-
+PagerFrag pagerFrag;
     protected void startFragment(int iFragNum){
 
         switch (iFragNum) {
@@ -118,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
 //                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StoryTemplatesFrag()).commit();
                 break;
             case 1:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, PagerFrag.newInstance(5)).commit();
+                pagerFrag = PagerFrag.newInstance(16);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pagerFrag).commit();
                 break;
             case 2:
 //                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ComCheckFrag()).commit();
@@ -129,6 +131,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
 }
 

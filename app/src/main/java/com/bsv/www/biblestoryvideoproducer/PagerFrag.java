@@ -6,7 +6,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 /**
  * Created by Jordan Skomer on 10/22/2015.
@@ -20,13 +19,18 @@ public class PagerFrag extends Fragment{
         frag.setArguments(bundle);
         return frag;
     }
+    private ViewPager mPager;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pager, container, false);
-        ViewPager mPager = (ViewPager)view.findViewById(R.id.pager_viewpager);
+        mPager = (ViewPager)view.findViewById(R.id.pager_viewpager);
 //        Toast.makeText(getActivity(), getArguments().getInt("NUM_OF_FRAGS"), Toast.LENGTH_SHORT).show();
         mPager.setAdapter(new com.bsv.www.biblestoryvideoproducer.PagerAdapter(getActivity(), getChildFragmentManager(), getArguments().getInt(NUM_OF_FRAG)));
         return view;
+    }
+
+    public void changeView(int position){
+        mPager.setCurrentItem(position, true);
     }
 
 }

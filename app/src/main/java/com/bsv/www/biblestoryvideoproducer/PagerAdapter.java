@@ -24,6 +24,6 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return TransFrag.newInstance(position);
+        return TransFrag.newInstance(position, NUM_OF_FRAGS);
     }
 }

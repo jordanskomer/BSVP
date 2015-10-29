@@ -4,12 +4,15 @@
     <style name="AppTheme" parent="Theme.AppCompat">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primaryDark</item>
-        <item name="android:colorBackground">@color/primary</item>
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:textColorPrimary">@android:color/white</item>
-        <item name="android:textColor">@color/darkGray</item>
-        <!--<item name="android:windowActionBar">false</item>-->
+        <item name="android:textColor">@color/white</item>
+        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <style name="ActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">

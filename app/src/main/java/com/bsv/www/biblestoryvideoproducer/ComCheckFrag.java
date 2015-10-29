@@ -8,6 +8,16 @@ import android.view.ViewGroup;
 
 
 public class ComCheckFrag extends Fragment {
+    private static final String SLIDE_NUM = "slidenum";
+
+    public static ComCheckFrag newInstance(int position){
+        ComCheckFrag frag = new ComCheckFrag();
+        Bundle args = new Bundle();
+        args.putInt(SLIDE_NUM, position);
+        frag.setArguments(args);
+        return frag;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

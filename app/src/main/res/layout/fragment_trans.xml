@@ -70,19 +70,22 @@
         />
 
 
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_mic_black"
-        app:elevation="4dp"
-        app:pressedTranslationZ="6dp"
-        app:backgroundTint="@color/white"
-        app:rippleColor="@color/lightGray"
-        app:borderWidth="0dp"/>
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_mic_black"
+            app:elevation="4dp"
+            app:pressedTranslationZ="6dp"
+            app:backgroundTint="@color/white"
+            app:rippleColor="@color/lightGray"
+            app:borderWidth="0dp"
+            />
+    </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>

@@ -68,7 +68,7 @@ public class TransFrag extends Fragment {
         //stuff for saving and playing the audio
         outputFile = Environment.getExternalStorageDirectory().getAbsolutePath();
         outputFile += "/" + fileName;
-        com.getbase.floatingactionbutton.FloatingActionButton floatingActionButton1 = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.trans_record);
+        FloatingActionButton floatingActionButton1 = (FloatingActionButton) view.findViewById(R.id.trans_record);
         floatingActionButton1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -99,7 +99,7 @@ public class TransFrag extends Fragment {
             }
         });
 
-        com.getbase.floatingactionbutton.FloatingActionButton floatingActionButton2 = (com.getbase.floatingactionbutton.FloatingActionButton) view.findViewById(R.id.trans_play);
+        FloatingActionButton floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.trans_play);
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +146,7 @@ public class TransFrag extends Fragment {
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-        mediaRecorder.setOutputFile(outputFile);
+        mediaRecorder.setOutputFile(fileName);
 
         return  mediaRecorder;
     }

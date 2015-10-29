@@ -41,12 +41,12 @@
         <item>@drawable/ic_mic_white</item>
     </array>
 
+
+    /* ListView */
+    <string name="playVideo">Play</string>
+    <string name="translateVideo">Translate</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_splash_screen">Story Producer</string>
-
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
 </resources>

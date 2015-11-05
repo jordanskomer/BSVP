@@ -6,6 +6,8 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
@@ -32,6 +34,7 @@ public class TransFrag extends Fragment {
     private static final String NUM_OF_SLIDES = "numofslide";
     private String outputFile=null;
     private String fileName = "recording.mp3";
+    private int record_count = 2;
 
     public static TransFrag newInstance(int position, int numOfSlides){
         TransFrag frag = new TransFrag();
@@ -68,7 +71,11 @@ public class TransFrag extends Fragment {
         //stuff for saving and playing the audio
         outputFile = Environment.getExternalStorageDirectory().getAbsolutePath();
         outputFile += "/" + fileName;
-        FloatingActionButton floatingActionButton1 = (FloatingActionButton) view.findViewById(R.id.trans_record);
+        final FloatingActionButton floatingActionButton1 = (FloatingActionButton) view.findViewById(R.id.trans_record);
+        final FloatingActionButton floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.trans_play);
+        floatingActionButton2.setVisibility(View.INVISIBLE);
+
+        //TODO handle an event when you simply click -> it crashes when you do this
         floatingActionButton1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -84,13 +91,22 @@ public class TransFrag extends Fragment {
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_OUTSIDE:
                     case MotionEvent.ACTION_CANCEL:
-                        Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_LONG).show();
-                        stopAudioRecorder(audioRecorder);
-                        break;
                     case MotionEvent.ACTION_POINTER_DOWN:
-                        break;
                     case MotionEvent.ACTION_POINTER_UP:
-                        break;
+                    Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_LONG).show();
+                    stopAudioRecorder(audioRecorder);
+                    //keep track of the number of records
+                    if (record_count == 2) {
+                        record_count--;
+                        floatingActionButton2.setVisibility(View.VISIBLE);
+
+                    } else if (record_count == 1) {
+                        record_count--;
+                        floatingActionButton1.setColorNormal(R.color.yellow);
+                    } else if (record_count == 0) {
+                        floatingActionButton1.setColorNormal(R.color.green);
+                    }
+                    break;
                     case MotionEvent.ACTION_MOVE:
                         break;
 
@@ -99,7 +115,6 @@ public class TransFrag extends Fragment {
             }
         });
 
-        FloatingActionButton floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.trans_play);
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

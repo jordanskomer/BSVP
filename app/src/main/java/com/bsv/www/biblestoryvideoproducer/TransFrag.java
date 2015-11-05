@@ -45,6 +45,7 @@ public class TransFrag extends Fragment {
         return frag;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +76,7 @@ public class TransFrag extends Fragment {
         final FloatingActionButton floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.trans_play);
         floatingActionButton2.setVisibility(View.INVISIBLE);
 
+
         //TODO handle an event when you simply click -> it crashes when you do this
         floatingActionButton1.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -84,6 +86,7 @@ public class TransFrag extends Fragment {
 
                     case MotionEvent.ACTION_DOWN:
 //                        v.setPressed(true);
+//                        v.performClick();
                         audioRecorder = createAudioRecorder(outputFile);
                         startAudioRecorder(audioRecorder);
                         Toast.makeText(getContext(), "Recording Started", Toast.LENGTH_LONG).show();
@@ -102,9 +105,9 @@ public class TransFrag extends Fragment {
 
                     } else if (record_count == 1) {
                         record_count--;
-                        floatingActionButton1.setColorNormal(R.color.yellow);
+                        floatingActionButton1.setColorNormalResId(R.color.yellow);
                     } else if (record_count == 0) {
-                        floatingActionButton1.setColorNormal(R.color.green);
+                        floatingActionButton1.setColorNormalResId(R.color.green);
                     }
                     break;
                     case MotionEvent.ACTION_MOVE:

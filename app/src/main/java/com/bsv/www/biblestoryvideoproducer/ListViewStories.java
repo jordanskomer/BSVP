@@ -2,6 +2,7 @@ package com.bsv.www.biblestoryvideoproducer;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,33 +15,32 @@ import java.io.IOException;
 /**
  * Created by hannahbrown on 9/25/15.
  */
-public class ListViewStories extends Activity{
+public class ListViewStories extends Fragment{
 
     ListView listView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_view);
+
+        View view = inflater.inflate(R.layout.activity_list_view, container, false);
 
         // Get ListView object from xml
-        listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView)getActivity().findViewById(R.id.listView);
 
         FileSystem fileSystem = new FileSystem();
 
         // Defined Array values to show in ListView
         String[] values = fileSystem.getVideos();
+        ListFiles[] listFiles = new ListFiles[values.length];
 
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
-        //TODO Images for listview
+        for(int i = 0; i < listFiles.length; i++) {
+            listFiles[i] = new ListFiles(fileSystem.getImage(values[i], 1), values[i]);
+        }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                R.layout.activity_menu_list, R.id.videoTitle, values);
+        CustomAdapter adapter = new CustomAdapter(getContext(), R.layout.story_list_item, listFiles);
 
+        listView = (ListView)view.findViewById(R.id.listView);
 
         // Assign adapter to ListView
         listView.setAdapter(adapter);
@@ -60,6 +60,8 @@ public class ListViewStories extends Activity{
             }
 
         });
+
+        return view;
     }
 
 }

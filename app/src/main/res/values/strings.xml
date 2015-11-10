@@ -12,7 +12,9 @@
     <string name="setup_consemail_hint">Consultant Email</string>
     <string name="title_activity_story_templates">Story Templates</string>
     <string name="title_activity_info_page">Information</string>
-    <string name="trans_menu_title">Translate</string>
+    <string name="title_fragment_translate">Translate</string>
+    <string name="title_fragment_community">Community Check</string>
+    <string name="title_fragment_consultant">Consultant Check</string>
 
     /*String names for Info Page*/
     <string name="consultant_phone">"Consultant Phone:  "</string>

@@ -1,4 +1,4 @@
-package com.bsv.www.biblestoryvideoproducer;
+package com.bsv.www.storyproducer;
 
 import android.graphics.Bitmap;
 

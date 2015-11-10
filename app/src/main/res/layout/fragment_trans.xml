@@ -3,8 +3,10 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:id="@+id/trans_layout"
     android:layout_height="match_parent"
-    tools:context="com.bsv.www.biblestoryvideoproducer.TransFrag">
+    android:foreground="@drawable/dim_bg"
+    tools:context="com.bsv.www.storyproducer.TransFrag">
 
     <ImageView
         android:id="@+id/trans_image_slide"
@@ -58,6 +60,17 @@
         android:textStyle="bold"
         android:textSize="@dimen/text_title"
         android:textColor="@color/darkGray"/>
+    <TextView
+        android:id="@+id/trans_scripture_body"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/trans_scripture_title"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:text="orem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. "
+        android:textSize="@dimen/text_body"
+        android:textColor="@color/gray"
+        />
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -68,8 +81,9 @@
         fab:fab_addButtonColorPressed="@color/lightGray"
         fab:fab_addButtonPlusIconColor="@color/darkGray"
         fab:fab_labelStyle="@style/menu_labels_style"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin">
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        >
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/trans_play"
             fab:fab_icon="@drawable/ic_play"
@@ -87,15 +101,4 @@
             fab:fab_colorPressed="@color/lightGray"
             fab:fab_title="Record"/>
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
-    <TextView
-        android:id="@+id/trans_scripture_body"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/trans_scripture_title"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:text="orem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. "
-        android:textSize="@dimen/text_body"
-        android:textColor="@color/gray"
-        />
 </RelativeLayout>

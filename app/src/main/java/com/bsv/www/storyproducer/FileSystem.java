@@ -1,10 +1,9 @@
-package com.bsv.www.biblestoryvideoproducer;
+package com.bsv.www.storyproducer;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 
-import java.util.zip.*;
 import java.io.*;
 import java.util.*;
 

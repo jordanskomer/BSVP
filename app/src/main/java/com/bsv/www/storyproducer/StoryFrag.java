@@ -1,21 +1,17 @@
-package com.bsv.www.biblestoryvideoproducer;
+package com.bsv.www.storyproducer;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import java.io.IOException;
 
 /**
  * Created by hannahbrown on 9/25/15.
  */
-public class ListViewStories extends Fragment{
+public class StoryFrag extends Fragment{
 
     ListView listView;
 

@@ -191,11 +191,4 @@ public class TransFrag extends Fragment {
         });
         dialog.show();
     }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if(menu != null){
-            menu.findItem(R.id.menu_search).setVisible(false);
-        }
-
-    }
 }

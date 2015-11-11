@@ -19,39 +19,39 @@ class FileSystem {
         this.language = language;
     }
 
-    String[] getVideos() {
+    public String[] getVideos() {
         String path = getPath();
-        System.out.println("Path: " + path);
-
         File f = new File(path);
         File file[] = f.listFiles();
         ArrayList<String> list = new ArrayList<>();
-
         for (int i=0; i < file.length; i++)
         {
             if(!file[i].getName().contains(".")) {
                 list.add(file[i].getName());
             }
         }
-
         String[] temp = new String[list.size()];
-        for(int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
         return list.toArray(temp);
     }
 
     private String getPath() {
-        return Environment.getExternalStorageDirectory() + "/BSVP/" + language;
+        if(isExternalStorageReadable()) {
+            return System.getenv("SECONDARY_STORAGE") + "/BSVP/" + language;
+        } else {
+            return null;
+        }
     }
 
-    private String getPath(String lang) {
-        return Environment.getExternalStorageDirectory() + "/BSVP/" + lang;
+    public String getPath(String lang) {
+        if(isExternalStorageReadable()) {
+            return System.getenv("SECONDARY_STORAGE") + "/BSVP/" + lang;
+        } else {
+            return null;
+        }
     }
 
-    Bitmap getImage(String story, int number) {
+    public Bitmap getImage(String story, int number) {
         String path = getPath() + "/" + story;
-
         File f = new File(path);
         File file[] = f.listFiles();
 
@@ -61,7 +61,15 @@ class FileSystem {
                 return BitmapFactory.decodeFile(path + "/" + file[i].getName());
             }
         }
-
         return null;
+    }
+
+    private boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+        return false;
     }
 }

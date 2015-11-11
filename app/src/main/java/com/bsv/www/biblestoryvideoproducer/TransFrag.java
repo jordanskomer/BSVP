@@ -1,28 +1,31 @@
-package com.bsv.www.biblestoryvideoproducer;
+package com.bsv.www.storyproducer;
 
 import android.app.Dialog;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
+
+import com.bsv.www.biblestoryvideoproducer.DialogListAdapter;
+import com.bsv.www.biblestoryvideoproducer.R;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
-
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,11 +33,12 @@ import java.io.IOException;
 
 public class TransFrag extends Fragment {
     private MediaRecorder audioRecorder;
-    private static final String SLIDE_NUM = "slidenum";
-    private static final String NUM_OF_SLIDES = "numofslide";
     private String outputFile=null;
     private String fileName = "recording.mp3";
+    private static final String SLIDE_NUM = "slidenum";
+    private static final String NUM_OF_SLIDES = "numofslide";
     private int record_count = 2;
+    private GestureDetector gestureDetector;
 
     public static TransFrag newInstance(int position, int numOfSlides){
         TransFrag frag = new TransFrag();
@@ -44,6 +48,7 @@ public class TransFrag extends Fragment {
         frag.setArguments(args);
         return frag;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,42 +79,50 @@ public class TransFrag extends Fragment {
         final FloatingActionButton floatingActionButton1 = (FloatingActionButton) view.findViewById(R.id.trans_record);
         final FloatingActionButton floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.trans_play);
         floatingActionButton2.setVisibility(View.INVISIBLE);
+        gestureDetector = new GestureDetector(getContext(), new SingleTapUp());
 
         //TODO handle an event when you simply click -> it crashes when you do this
         floatingActionButton1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                //works with longPress.  Try using onShowPress and onSingleTapUp maybe?
+                // https://developer.xamarin.com/guides/cross-platform/application_fundamentals/touch/part_3_touch_in_android/
+                //sounds super complicated? not really sure where to go with this.
+                if (gestureDetector.onTouchEvent(event)) {
+                    Toast.makeText(getContext(), "Hold to record", Toast.LENGTH_LONG).show();
+                    return true;
+                } else {
+                    switch (event.getAction() & MotionEvent.ACTION_MASK) {
 
-                    case MotionEvent.ACTION_DOWN:
+                        case MotionEvent.ACTION_DOWN:
 //                        v.setPressed(true);
-                        audioRecorder = createAudioRecorder(outputFile);
-                        startAudioRecorder(audioRecorder);
-                        Toast.makeText(getContext(), "Recording Started", Toast.LENGTH_LONG).show();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_OUTSIDE:
-                    case MotionEvent.ACTION_CANCEL:
-                    case MotionEvent.ACTION_POINTER_DOWN:
-                    case MotionEvent.ACTION_POINTER_UP:
-                    Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_LONG).show();
-                    stopAudioRecorder(audioRecorder);
-                    //keep track of the number of records
-                    if (record_count == 2) {
-                        record_count--;
-                        floatingActionButton2.setVisibility(View.VISIBLE);
+                            audioRecorder = createAudioRecorder(outputFile);
+                            startAudioRecorder(audioRecorder);
+                            Toast.makeText(getContext(), "Recording Started", Toast.LENGTH_LONG).show();
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_OUTSIDE:
+                        case MotionEvent.ACTION_CANCEL:
+                        case MotionEvent.ACTION_POINTER_DOWN:
+                        case MotionEvent.ACTION_POINTER_UP:
+                            Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_LONG).show();
+                            stopAudioRecorder(audioRecorder);
+                            //keep track of the number of records
+                            if (record_count == 2) {
+                                record_count--;
+                                floatingActionButton2.setVisibility(View.VISIBLE);
+                                floatingActionButton1.setColorNormalResId(R.color.yellow);
 
-                    } else if (record_count == 1) {
-                        record_count--;
-                        floatingActionButton1.setColorNormal(R.color.yellow);
-                    } else if (record_count == 0) {
-                        floatingActionButton1.setColorNormal(R.color.green);
+                            } else if (record_count == 1) {
+                                record_count--;
+                                floatingActionButton1.setColorNormalResId(R.color.green);
+                            }
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            break;
+
                     }
-                    break;
-                    case MotionEvent.ACTION_MOVE:
-                        break;
-
                 }
                 return true;
             }
@@ -139,6 +152,14 @@ public class TransFrag extends Fragment {
 
 
         return view;
+    }
+
+    //experimenting with GestureListener
+    private class SingleTapUp extends SimpleOnGestureListener {
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent event) {
+            return true;
+        }
     }
 
 

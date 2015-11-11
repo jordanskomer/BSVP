@@ -11,7 +11,7 @@ import java.util.*;
  * Created by hannahbrown on 9/27/15.
  */
 class FileSystem {
-    String language = "English";
+    private String language = "English";
 
     FileSystem() {}
     //TODO Ability to change languages
@@ -42,11 +42,11 @@ class FileSystem {
     }
 
     private String getPath() {
-        return Environment.getExternalStorageDirectory() + "/" + language;
+        return Environment.getExternalStorageDirectory() + "/BSVP/" + language;
     }
 
-    private String getPath(String language) {
-        return Environment.getExternalStorageDirectory() + "/" + language;
+    private String getPath(String lang) {
+        return Environment.getExternalStorageDirectory() + "/BSVP/" + lang;
     }
 
     Bitmap getImage(String story, int number) {

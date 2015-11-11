@@ -1,4 +1,4 @@
-package com.bsv.www.storyproducer;
+package com.bsv.www.biblestoryvideoproducer;
 
 import android.app.Dialog;
 import android.media.MediaPlayer;
@@ -23,9 +23,11 @@ import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,10 +35,10 @@ import java.io.IOException;
 
 public class TransFrag extends Fragment {
     private MediaRecorder audioRecorder;
-    private String outputFile=null;
-    private String fileName = "recording.mp3";
     private static final String SLIDE_NUM = "slidenum";
     private static final String NUM_OF_SLIDES = "numofslide";
+    private String outputFile=null;
+    private String fileName = "recording.mp3";
     private int record_count = 2;
     private GestureDetector gestureDetector;
 
@@ -48,7 +50,6 @@ public class TransFrag extends Fragment {
         frag.setArguments(args);
         return frag;
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,30 +98,31 @@ public class TransFrag extends Fragment {
 
                         case MotionEvent.ACTION_DOWN:
 //                        v.setPressed(true);
-                            audioRecorder = createAudioRecorder(outputFile);
-                            startAudioRecorder(audioRecorder);
-                            Toast.makeText(getContext(), "Recording Started", Toast.LENGTH_LONG).show();
-                            break;
-                        case MotionEvent.ACTION_UP:
-                        case MotionEvent.ACTION_OUTSIDE:
-                        case MotionEvent.ACTION_CANCEL:
-                        case MotionEvent.ACTION_POINTER_DOWN:
-                        case MotionEvent.ACTION_POINTER_UP:
-                            Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_LONG).show();
-                            stopAudioRecorder(audioRecorder);
-                            //keep track of the number of records
-                            if (record_count == 2) {
-                                record_count--;
-                                floatingActionButton2.setVisibility(View.VISIBLE);
-                                floatingActionButton1.setColorNormalResId(R.color.yellow);
+                        audioRecorder = createAudioRecorder(outputFile);
+                        startAudioRecorder(audioRecorder);
+                        Toast.makeText(getContext(), "Recording Started", Toast.LENGTH_LONG).show();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_OUTSIDE:
+                    case MotionEvent.ACTION_CANCEL:
+                    case MotionEvent.ACTION_POINTER_DOWN:
+                    case MotionEvent.ACTION_POINTER_UP:
+                    Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_LONG).show();
+                    stopAudioRecorder(audioRecorder);
+                    //keep track of the number of records
+                    if (record_count == 2) {
+                        record_count--;
+                        floatingActionButton2.setVisibility(View.VISIBLE);
 
-                            } else if (record_count == 1) {
-                                record_count--;
-                                floatingActionButton1.setColorNormalResId(R.color.green);
-                            }
-                            break;
-                        case MotionEvent.ACTION_MOVE:
-                            break;
+                    } else if (record_count == 1) {
+                        record_count--;
+                        floatingActionButton1.setColorNormal(R.color.yellow);
+                    } else if (record_count == 0) {
+                        floatingActionButton1.setColorNormal(R.color.green);
+                    }
+                    break;
+                    case MotionEvent.ACTION_MOVE:
+                        break;
 
                     }
                 }

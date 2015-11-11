@@ -1,4 +1,4 @@
-package com.bsv.www.biblestoryvideoproducer;
+package com.bsv.www.storyproducer;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,10 +12,12 @@ import android.view.ViewGroup;
  */
 public class PagerFrag extends Fragment{
     public static final String NUM_OF_FRAG = "fragnum";
-    public static PagerFrag newInstance(int numOfFrags){
+    public static final String TYPE_OF_FRAG = "fragtype";
+    public static PagerFrag newInstance(int numOfFrags, int typeOfFrag){
         PagerFrag frag = new PagerFrag();
         Bundle bundle = new Bundle();
         bundle.putInt(NUM_OF_FRAG, numOfFrags);
+        bundle.putInt(TYPE_OF_FRAG, typeOfFrag);
         frag.setArguments(bundle);
         return frag;
     }
@@ -24,8 +26,7 @@ public class PagerFrag extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pager, container, false);
         mPager = (ViewPager)view.findViewById(R.id.pager_viewpager);
-//        Toast.makeText(getActivity(), getArguments().getInt("NUM_OF_FRAGS"), Toast.LENGTH_SHORT).show();
-        mPager.setAdapter(new com.bsv.www.biblestoryvideoproducer.PagerAdapter(getActivity(), getChildFragmentManager(), getArguments().getInt(NUM_OF_FRAG)));
+        mPager.setAdapter(new com.bsv.www.storyproducer.PagerAdapter(getActivity(), getChildFragmentManager(), getArguments().getInt(NUM_OF_FRAG), getArguments().getInt(TYPE_OF_FRAG)));
         return view;
     }
 

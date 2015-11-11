@@ -1,4 +1,4 @@
-package com.bsv.www.biblestoryvideoproducer;
+package com.bsv.www.storyproducer;
 
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
@@ -11,10 +11,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class PagerAdapter extends FragmentPagerAdapter {
     Context context;
     private static int NUM_OF_FRAGS = 5;
-    public PagerAdapter(Context context, FragmentManager fm, int fragNum){
+    private static int FRAG_TYPE = 0;
+    public PagerAdapter(Context context, FragmentManager fm, int fragNum, int fragType){
         super(fm);
         this.context = context;
         NUM_OF_FRAGS = fragNum;
+        FRAG_TYPE = fragType;
     }
 
     @Override
@@ -24,6 +26,17 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return TransFrag.newInstance(position, NUM_OF_FRAGS);
+        switch (FRAG_TYPE){
+            //Translate
+            case 1:
+                return TransFrag.newInstance(position, NUM_OF_FRAGS);
+            //Community
+            case 2:
+                return new ComCheckFrag();
+            //Consultant
+            case 3:
+                return new ConCheckFrag();
+        }
+        return null;
     }
 }

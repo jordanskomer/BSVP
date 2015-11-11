@@ -1,4 +1,4 @@
-package com.bsv.www.biblestoryvideoproducer;
+package com.bsv.www.storyproducer;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 /**
  * Created by Jordan Skomer on 10/26/2015.
  */
-public class DialogListAdapter extends BaseAdapter {
+public class DialogListAdapter extends BaseAdapter  {
     private int[] slides;
     int currentSlide;
     int checkSlide;
@@ -35,7 +35,7 @@ public class DialogListAdapter extends BaseAdapter {
         return position;
     }
 
-    public int getChecked(){
+    public int getSelectedSlide(){
         return checkSlide;
     }
     @Override
@@ -74,4 +74,6 @@ public class DialogListAdapter extends BaseAdapter {
         });
         return view;
     }
+
 }
+

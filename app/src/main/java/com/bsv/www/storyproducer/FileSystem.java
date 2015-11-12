@@ -55,11 +55,10 @@ class FileSystem {
         File f = new File(path);
         File file[] = f.listFiles();
 
-        for (int i=0; i < file.length; i++)
-        {
-            if(file[i].getName().contains(number + ".jpg")) {
-                return BitmapFactory.decodeFile(path + "/" + file[i].getName());
-            }
+        for (int i=0; i < file.length; i++) {
+                if (file[i].getName().equals(number + ".jpg")) {
+                    return BitmapFactory.decodeFile(path + "/" + file[i].getName());
+                }
         }
         return null;
     }

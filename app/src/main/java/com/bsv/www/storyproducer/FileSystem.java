@@ -26,7 +26,7 @@ class FileSystem {
         ArrayList<String> list = new ArrayList<>();
         for (int i=0; i < file.length; i++)
         {
-            if(!file[i].getName().contains(".")) {
+            if(!file[i].isHidden()) {
                 list.add(file[i].getName());
             }
         }
@@ -61,6 +61,19 @@ class FileSystem {
                 }
         }
         return null;
+    }
+
+    public int getImageAmount(String storyName){
+        String path = getPath() + "/" + storyName;
+        File f = new File(path);
+        File file[] = f.listFiles();
+        int count = 0;
+        for(int i=0; i<file.length; i++) {
+            if (!file[i].isHidden() && file[i].getName().contains(".jpg")) {
+                count++;
+            }
+        }
+        return count;
     }
 
     private boolean isExternalStorageReadable() {

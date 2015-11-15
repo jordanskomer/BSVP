@@ -41,6 +41,7 @@ public class CustomAdapter extends ArrayAdapter<ListFiles> {
             holder = new FileHolder();
             holder.imgIcon = (ImageView)row.findViewById(R.id.story_list_image);
             holder.txtTitle = (TextView)row.findViewById(R.id.story_list_title);
+            holder.txtSubtitle = (TextView)row.findViewById(R.id.story_list_subtitle);
 
             row.setTag(holder);
         }
@@ -53,6 +54,7 @@ public class CustomAdapter extends ArrayAdapter<ListFiles> {
         holder.txtTitle.setText(listFiles.title);
         holder.imgIcon.setImageBitmap(listFiles.icon);
         holder.imgIcon.setImageBitmap(getRoundedShape(listFiles.icon));
+        holder.txtSubtitle.setText(listFiles.subtitle);
 
         return row;
     }
@@ -61,29 +63,22 @@ public class CustomAdapter extends ArrayAdapter<ListFiles> {
     {
         ImageView imgIcon;
         TextView txtTitle;
+        TextView txtSubtitle;
     }
 
     public static Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
-        // TODO Auto-generated method stub
         int targetWidth = Math.min(scaleBitmapImage.getWidth(), scaleBitmapImage.getHeight());
-        int targetHeight = targetWidth;
-        Bitmap targetBitmap = Bitmap.createBitmap(targetWidth,
-                targetHeight,Bitmap.Config.ARGB_8888);
+        Bitmap targetBitmap = Bitmap.createBitmap(targetWidth, targetWidth,Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(targetBitmap);
         Path path = new Path();
-        path.addCircle(((float) targetWidth - 1) / 2,
-                ((float) targetHeight - 1) / 2,
-                (Math.min(((float) targetWidth),
-                        ((float) targetHeight)) / 2),
-                Path.Direction.CCW);
+        path.addCircle(((float) targetWidth - 1) / 2, ((float) targetWidth - 1) / 2,
+                (Math.min(((float) targetWidth), ((float) targetWidth)) / 2), Path.Direction.CCW);
         canvas.clipPath(path);
         Bitmap sourceBitmap = scaleBitmapImage;
         canvas.drawBitmap(sourceBitmap,
-                new Rect(0, 0, sourceBitmap.getWidth(),
-                        sourceBitmap.getHeight()),
-                new Rect(0, 0, targetWidth,
-                        targetHeight), null);
+                new Rect(0, 0, sourceBitmap.getWidth(), sourceBitmap.getHeight()),
+                new Rect(0, 0, targetWidth, targetWidth), null);
         return targetBitmap;
     }
 }
@@ -91,14 +86,14 @@ public class CustomAdapter extends ArrayAdapter<ListFiles> {
 class ListFiles {
     public Bitmap icon;
     public String title;
+    public String subtitle;
 
-    public ListFiles(){
-        super();
-    }
+    public ListFiles(){ super(); }
 
-    public ListFiles(Bitmap icon, String title) {
+    public ListFiles(Bitmap icon, String title, String subtitle) {
         super();
         this.icon = icon;
         this.title = title;
+        this.subtitle = subtitle;
     }
 }

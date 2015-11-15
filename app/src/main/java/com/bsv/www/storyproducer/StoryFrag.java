@@ -31,7 +31,7 @@ public class StoryFrag extends Fragment{
         ListFiles[] listFiles = new ListFiles[values.length];
 
         for(int i = 0; i < listFiles.length; i++) {
-            listFiles[i] = new ListFiles(fileSystem.getImage(values[i], 1), values[i]);
+            listFiles[i] = new ListFiles(fileSystem.getImage(values[i], 1), values[i], fileSystem.getText(values[i], 1)[1]);
         }
 
         CustomAdapter adapter = new CustomAdapter(getContext(), R.layout.story_list_item, listFiles);

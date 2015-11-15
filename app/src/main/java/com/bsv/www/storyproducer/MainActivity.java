@@ -114,13 +114,12 @@ public class MainActivity extends AppCompatActivity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            startFragment(position);
+//            startFragment(position, 5, "BLANK");
             mDrawerLayout.closeDrawer(mDrawerList);
         }
     }
     private boolean hideIcon = false;
-    private int slideCount = 16;
-    protected void startFragment(int iFragNum){
+    public void startFragment(int iFragNum, int slideCount, String storyName){
         String title = "";
         Fragment fragment = null;
         switch (iFragNum) {
@@ -130,17 +129,17 @@ public class MainActivity extends AppCompatActivity {
                 hideIcon = false;
                 break;
             case 1:
-                fragment = PagerFrag.newInstance(slideCount, iFragNum);
+                fragment = PagerFrag.newInstance(slideCount, iFragNum, storyName);
                 title=getApplicationContext().getString(R.string.title_fragment_translate);
                 hideIcon = true;
                 break;
             case 2:
-                fragment = PagerFrag.newInstance(slideCount, iFragNum);
+                fragment = PagerFrag.newInstance(slideCount, iFragNum, storyName);
                 title=getApplicationContext().getString(R.string.title_fragment_community);
                 hideIcon = true;
                 break;
             case 3:
-                fragment = PagerFrag.newInstance(slideCount, iFragNum);
+                fragment = PagerFrag.newInstance(slideCount, iFragNum, storyName);
                 title=getApplicationContext().getString(R.string.title_fragment_consultant);
                 hideIcon = true;
                 break;

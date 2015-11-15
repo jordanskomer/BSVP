@@ -52,7 +52,7 @@ public class CustomAdapter extends ArrayAdapter<ListFiles> {
 
         ListFiles listFiles = data[position];
         holder.txtTitle.setText(listFiles.title);
-        holder.imgIcon.setImageBitmap(listFiles.icon);
+//        holder.imgIcon.setImageBitmap(listFiles.icon);
         holder.imgIcon.setImageBitmap(getRoundedShape(listFiles.icon));
         holder.txtSubtitle.setText(listFiles.subtitle);
 

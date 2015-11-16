@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -37,16 +38,18 @@ public class TransFrag extends Fragment {
     private MediaRecorder audioRecorder;
     private static final String SLIDE_NUM = "slidenum";
     private static final String NUM_OF_SLIDES = "numofslide";
+    private static final String STORY_NAME = "storyname";
     private String outputFile=null;
     private String fileName = "recording.mp3";
     private int record_count = 2;
     private GestureDetector gestureDetector;
 
-    public static TransFrag newInstance(int position, int numOfSlides){
+    public static TransFrag newInstance(int position, int numOfSlides, String storyName){
         TransFrag frag = new TransFrag();
         Bundle args = new Bundle();
         args.putInt(SLIDE_NUM, position);
         args.putInt(NUM_OF_SLIDES, numOfSlides);
+        args.putString(STORY_NAME, storyName);
         frag.setArguments(args);
         return frag;
     }
@@ -60,13 +63,18 @@ public class TransFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        getActivity().getActionBar().setTitle(R.string.trans_menu_title);
+        int currentSlide = getArguments().getInt(SLIDE_NUM);
+        String storyName = getArguments().getString(STORY_NAME);
         // Inflate the layout for this fragment
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_trans, container, false);
-//        Snackbar.make(getActivity().getCurrentFocus(), "TEST", Snackbar.LENGTH_LONG).show();
 
         //Change Slide Number and add on click
         TextView slideNum = (TextView)view.findViewById(R.id.trans_slide_indicator);
+        // Setting Story Text
+        FileSystem fileSystem = new FileSystem();
+        ImageView slideimage = (ImageView)view.findViewById(R.id.trans_image_slide);
+        slideimage.setImageBitmap(fileSystem.getImage(storyName, currentSlide));
+
         slideNum.setText("#" + (getArguments().getInt(SLIDE_NUM) + 1));
         slideNum.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +84,7 @@ public class TransFrag extends Fragment {
         });
         //stuff for saving and playing the audio
         outputFile = Environment.getExternalStorageDirectory().getAbsolutePath();
-        outputFile += "/" + fileName;
+        outputFile += "/BSVP/" + getArguments().getString(STORY_NAME) + "/" + fileName;
         final FloatingActionButton floatingActionButton1 = (FloatingActionButton) view.findViewById(R.id.trans_record);
         final FloatingActionButton floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.trans_play);
         floatingActionButton2.setVisibility(View.INVISIBLE);
@@ -216,12 +224,5 @@ public class TransFrag extends Fragment {
             }
         });
         dialog.show();
-    }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if(menu != null){
-            menu.findItem(R.id.menu_search).setVisible(false);
-        }
-
     }
 }

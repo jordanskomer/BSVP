@@ -2,6 +2,10 @@ package com.bsv.www.storyproducer;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Path;
+import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +41,7 @@ public class CustomAdapter extends ArrayAdapter<ListFiles> {
             holder = new FileHolder();
             holder.imgIcon = (ImageView)row.findViewById(R.id.story_list_image);
             holder.txtTitle = (TextView)row.findViewById(R.id.story_list_title);
+            holder.txtSubtitle = (TextView)row.findViewById(R.id.story_list_subtitle);
 
             row.setTag(holder);
         }
@@ -47,7 +52,9 @@ public class CustomAdapter extends ArrayAdapter<ListFiles> {
 
         ListFiles listFiles = data[position];
         holder.txtTitle.setText(listFiles.title);
-        holder.imgIcon.setImageBitmap(listFiles.icon);
+//        holder.imgIcon.setImageBitmap(listFiles.icon);
+        holder.imgIcon.setImageBitmap(getRoundedShape(listFiles.icon));
+        holder.txtSubtitle.setText(listFiles.subtitle);
 
         return row;
     }
@@ -56,5 +63,37 @@ public class CustomAdapter extends ArrayAdapter<ListFiles> {
     {
         ImageView imgIcon;
         TextView txtTitle;
+        TextView txtSubtitle;
+    }
+
+    public static Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
+        int targetWidth = Math.min(scaleBitmapImage.getWidth(), scaleBitmapImage.getHeight());
+        Bitmap targetBitmap = Bitmap.createBitmap(targetWidth, targetWidth,Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(targetBitmap);
+        Path path = new Path();
+        path.addCircle(((float) targetWidth - 1) / 2, ((float) targetWidth - 1) / 2,
+                (Math.min(((float) targetWidth), ((float) targetWidth)) / 2), Path.Direction.CCW);
+        canvas.clipPath(path);
+        Bitmap sourceBitmap = scaleBitmapImage;
+        canvas.drawBitmap(sourceBitmap,
+                new Rect(0, 0, sourceBitmap.getWidth(), sourceBitmap.getHeight()),
+                new Rect(0, 0, targetWidth, targetWidth), null);
+        return targetBitmap;
+    }
+}
+
+class ListFiles {
+    public Bitmap icon;
+    public String title;
+    public String subtitle;
+
+    public ListFiles(){ super(); }
+
+    public ListFiles(Bitmap icon, String title, String subtitle) {
+        super();
+        this.icon = icon;
+        this.title = title;
+        this.subtitle = subtitle;
     }
 }

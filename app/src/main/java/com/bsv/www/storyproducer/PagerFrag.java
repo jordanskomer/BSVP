@@ -13,11 +13,13 @@ import android.view.ViewGroup;
 public class PagerFrag extends Fragment{
     public static final String NUM_OF_FRAG = "fragnum";
     public static final String TYPE_OF_FRAG = "fragtype";
-    public static PagerFrag newInstance(int numOfFrags, int typeOfFrag){
+    public static final String STORY_NAME = "storyname";
+    public static PagerFrag newInstance(int numOfFrags, int typeOfFrag, String storyName){
         PagerFrag frag = new PagerFrag();
         Bundle bundle = new Bundle();
         bundle.putInt(NUM_OF_FRAG, numOfFrags);
         bundle.putInt(TYPE_OF_FRAG, typeOfFrag);
+        bundle.putString(STORY_NAME, storyName);
         frag.setArguments(bundle);
         return frag;
     }

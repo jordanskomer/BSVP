@@ -14,14 +14,97 @@ class FileSystem {
     private String language = "English";
 
     FileSystem() {}
-    //TODO Ability to change languages
+
     void changeLanguage(String language) {
         this.language = language;
     }
 
-    String[] getVideos() {
+    public String[] getVideos() {
         String path = getPath();
-        System.out.println("Path: " + path);
+        File f = new File(path);
+        File file[] = f.listFiles();
+        ArrayList<String> list = new ArrayList<>();
+        for (int i=0; i < file.length; i++)
+        {
+            if(!file[i].isHidden()) {
+                list.add(file[i].getName());
+            }
+        }
+        String[] temp = new String[list.size()];
+        return list.toArray(temp);
+    }
+
+    private String getPath() {
+        if(isExternalStorageReadable()) {
+            return System.getenv("SECONDARY_STORAGE") + "/BSVP/" + language;
+        } else {
+            return null;
+        }
+    }
+
+    public String getPath(String lang) {
+        if(isExternalStorageReadable()) {
+            return System.getenv("SECONDARY_STORAGE") + "/BSVP/" + lang;
+        } else {
+            return null;
+        }
+    }
+
+    public Bitmap getImage(String story, int number) {
+        String path = getPath() + "/" + story;
+        File f = new File(path);
+        File file[] = f.listFiles();
+
+        for (int i=0; i < file.length; i++) {
+                if (file[i].getName().equals(number + ".jpg")) {
+                    return BitmapFactory.decodeFile(path + "/" + file[i].getName());
+                }
+        }
+        return null;
+    }
+
+    public int getImageAmount(String storyName){
+        String path = getPath() + "/" + storyName;
+        File f = new File(path);
+        File file[] = f.listFiles();
+        int count = 0;
+        for(int i=0; i<file.length; i++) {
+            if (!file[i].isHidden() && file[i].getName().contains(".jpg")) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    public String[] getText(String story, int number) {
+
+        try {
+            Scanner input = new Scanner(new File(getPath() + "/" + story + "/" + number + ".txt"));
+            String ret = "";
+
+            while (input.hasNext()) {
+                ret += input.nextLine();
+            }
+
+            input.close();
+            return ret.split("~");
+
+        } catch(FileNotFoundException e) {
+            return null;
+        }
+    }
+
+    public String[] getLanguages() {
+        String path = getPath().replace(language, "");
 
         File f = new File(path);
         File file[] = f.listFiles();
@@ -33,35 +116,7 @@ class FileSystem {
                 list.add(file[i].getName());
             }
         }
-
         String[] temp = new String[list.size()];
-        for(int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
         return list.toArray(temp);
-    }
-
-    private String getPath() {
-        return Environment.getExternalStorageDirectory() + "/BSVP/" + language;
-    }
-
-    private String getPath(String lang) {
-        return Environment.getExternalStorageDirectory() + "/BSVP/" + lang;
-    }
-
-    Bitmap getImage(String story, int number) {
-        String path = getPath() + "/" + story;
-
-        File f = new File(path);
-        File file[] = f.listFiles();
-
-        for (int i=0; i < file.length; i++)
-        {
-            if(file[i].getName().contains(number + ".jpg")) {
-                return BitmapFactory.decodeFile(path + "/" + file[i].getName());
-            }
-        }
-
-        return null;
     }
 }

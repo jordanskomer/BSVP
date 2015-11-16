@@ -61,8 +61,17 @@ public class TransFrag extends Fragment {
         TextView slideNum = (TextView)view.findViewById(R.id.trans_slide_indicator);
         // Setting Story Text
         FileSystem fileSystem = new FileSystem();
+        fileSystem.loadSlideContent(storyName, 1);
         ImageView slideimage = (ImageView)view.findViewById(R.id.trans_image_slide);
-        slideimage.setImageBitmap(fileSystem.getImage(storyName, currentSlide));
+        slideimage.setImageBitmap(fileSystem.getImage(storyName, currentSlide + 1));
+        TextView slideTitle = (TextView)view.findViewById(R.id.trans_slide_title_primary);
+        slideTitle.setText(fileSystem.getTitle());
+        TextView slideSubTitle = (TextView)view.findViewById(R.id.trans_slide_title_secondary);
+        slideSubTitle.setText(fileSystem.getSlideSubTitle());
+        TextView slideVerse = (TextView)view.findViewById(R.id.trans_scripture_title);
+        slideVerse.setText(fileSystem.getSlideSubTitle());
+        TextView slideContent = (TextView)view.findViewById(R.id.trans_scripture_body);
+        slideContent.setText(fileSystem.getSlideContent());
 
         slideNum.setText("#" + (getArguments().getInt(SLIDE_NUM) + 1));
         slideNum.setOnClickListener(new View.OnClickListener() {

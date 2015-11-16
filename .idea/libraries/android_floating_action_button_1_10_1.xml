@@ -8,8 +8,6 @@
       <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.futuresimple/android-floating-action-button/1.10.1/res" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.futuresimple/android-floating-action-button/1.10.1/d482e2361bcbf33562392bd24b98503e635b7da9/android-floating-action-button-1.10.1-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

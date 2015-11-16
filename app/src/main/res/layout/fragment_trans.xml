@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:id="@+id/trans_layout"
     android:layout_height="match_parent"
-    android:foreground="@drawable/dim_bg"
+    android:background="@color/white"
     tools:context="com.bsv.www.storyproducer.TransFrag">
 
     <ImageView
         android:id="@+id/trans_image_slide"
         android:layout_width="match_parent"
         android:layout_height="@dimen/trans_image_height"
-        android:background="@color/lightBlue"/>
+        android:scaleType="centerCrop"/>
     <RelativeLayout
         android:id="@+id/trans_info_bar"
         android:layout_width="match_parent"
@@ -60,17 +60,27 @@
         android:textStyle="bold"
         android:textSize="@dimen/text_title"
         android:textColor="@color/darkGray"/>
-    <TextView
-        android:id="@+id/trans_scripture_body"
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
+        android:fillViewport="true"
         android:layout_below="@+id/trans_scripture_title"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:text="orem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. "
-        android:textSize="@dimen/text_body"
-        android:textColor="@color/gray"
-        />
+        android:requiresFadingEdge="vertical"
+        android:fadingEdgeLength="20dp"
+        android:overScrollMode="ifContentScrolls">
+        <TextView
+            android:id="@+id/trans_scripture_body"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/trans_scripture_title"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:scrollbars="vertical"
+            android:text="orem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. "
+            android:textSize="@dimen/text_body"
+            android:textColor="@color/gray"
+            />
+    </ScrollView>
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/fab"
         android:layout_width="wrap_content"

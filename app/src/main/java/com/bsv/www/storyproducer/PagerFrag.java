@@ -28,7 +28,8 @@ public class PagerFrag extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pager, container, false);
         mPager = (ViewPager)view.findViewById(R.id.pager_viewpager);
-        mPager.setAdapter(new com.bsv.www.storyproducer.PagerAdapter(getActivity(), getChildFragmentManager(), getArguments().getInt(NUM_OF_FRAG), getArguments().getInt(TYPE_OF_FRAG)));
+        mPager.setAdapter(new com.bsv.www.storyproducer.PagerAdapter(getActivity(), getChildFragmentManager(), getArguments().getInt(NUM_OF_FRAG), getArguments().getInt(TYPE_OF_FRAG), getArguments().getString(STORY_NAME)));
+        mPager.setPageTransformer(true, new PagerAnimation());
         return view;
     }
 

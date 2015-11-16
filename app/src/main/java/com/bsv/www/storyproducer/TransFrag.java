@@ -61,8 +61,17 @@ public class TransFrag extends Fragment {
         TextView slideNum = (TextView)view.findViewById(R.id.trans_slide_indicator);
         // Setting Story Text
         FileSystem fileSystem = new FileSystem();
+        fileSystem.loadSlideContent(storyName, 1);
         ImageView slideimage = (ImageView)view.findViewById(R.id.trans_image_slide);
-        slideimage.setImageBitmap(fileSystem.getImage(storyName, currentSlide));
+        slideimage.setImageBitmap(fileSystem.getImage(storyName, currentSlide + 1));
+        TextView slideTitle = (TextView)view.findViewById(R.id.trans_slide_title_primary);
+        slideTitle.setText(fileSystem.getTitle());
+        TextView slideSubTitle = (TextView)view.findViewById(R.id.trans_slide_title_secondary);
+        slideSubTitle.setText(fileSystem.getSlideSubTitle());
+        TextView slideVerse = (TextView)view.findViewById(R.id.trans_scripture_title);
+        slideVerse.setText(fileSystem.getSlideSubTitle());
+        TextView slideContent = (TextView)view.findViewById(R.id.trans_scripture_body);
+        slideContent.setText(fileSystem.getSlideContent());
 
         slideNum.setText("#" + (getArguments().getInt(SLIDE_NUM) + 1));
         slideNum.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +87,11 @@ public class TransFrag extends Fragment {
         final FloatingActionButton floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.trans_play);
         floatingActionButton2.setVisibility(View.INVISIBLE);
 
-
+        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
         //TODO handle an event when you simply click -> it crashes when you do this
         floatingActionButton1.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -87,8 +100,7 @@ public class TransFrag extends Fragment {
                 switch (event.getAction() & MotionEvent.ACTION_MASK) {
 
                     case MotionEvent.ACTION_DOWN:
-//                        v.setPressed(true);
-//                        v.performClick();
+                        v.setPressed(true);
                         audioRecorder = createAudioRecorder(outputFile);
                         startAudioRecorder(audioRecorder);
                         Toast.makeText(getContext(), "Recording Started", Toast.LENGTH_LONG).show();
@@ -98,20 +110,20 @@ public class TransFrag extends Fragment {
                     case MotionEvent.ACTION_CANCEL:
                     case MotionEvent.ACTION_POINTER_DOWN:
                     case MotionEvent.ACTION_POINTER_UP:
-                    Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_LONG).show();
-                    stopAudioRecorder(audioRecorder);
-                    //keep track of the number of records
-                    if (record_count == 2) {
-                        record_count--;
-                        floatingActionButton2.setVisibility(View.VISIBLE);
+                        Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_LONG).show();
+                        stopAudioRecorder(audioRecorder);
+                        //keep track of the number of records
+                        if (record_count == 2) {
+                            record_count--;
+                            floatingActionButton2.setVisibility(View.VISIBLE);
 
-                    } else if (record_count == 1) {
-                        record_count--;
-                        floatingActionButton1.setColorNormalResId(R.color.yellow);
-                    } else if (record_count == 0) {
-                        floatingActionButton1.setColorNormalResId(R.color.green);
-                    }
-                    break;
+                        } else if (record_count == 1) {
+                            record_count--;
+                            floatingActionButton1.setColorNormalResId(R.color.yellow);
+                        } else if (record_count == 0) {
+                            floatingActionButton1.setColorNormalResId(R.color.green);
+                        }
+                        break;
                     case MotionEvent.ACTION_MOVE:
                         break;
 

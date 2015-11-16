@@ -12,11 +12,13 @@ public class PagerAdapter extends FragmentPagerAdapter {
     Context context;
     private static int NUM_OF_FRAGS = 5;
     private static int FRAG_TYPE = 0;
-    public PagerAdapter(Context context, FragmentManager fm, int fragNum, int fragType){
+    private static String FRAG_STORY = "";
+    public PagerAdapter(Context context, FragmentManager fm, int fragNum, int fragType, String fragStory){
         super(fm);
         this.context = context;
         NUM_OF_FRAGS = fragNum;
         FRAG_TYPE = fragType;
+        FRAG_STORY = fragStory;
     }
 
     @Override
@@ -29,7 +31,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
         switch (FRAG_TYPE){
             //Translate
             case 1:
-                return TransFrag.newInstance(position, NUM_OF_FRAGS);
+                return TransFrag.newInstance(position, NUM_OF_FRAGS, FRAG_STORY);
             //Community
             case 2:
                 return new ComCheckFrag();

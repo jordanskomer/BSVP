@@ -104,14 +104,11 @@ class FileSystem {
     public String getSubTitle(){
         return content[1];
     }
-    public String getSlideTitle(){
+    public String getSlideVerse(){
         return content[2];
     }
-    public String getSlideSubTitle(){
-        return content[3];
-    }
     public String getSlideContent(){
-        return content[4];
+        return content[3];
     }
 
 

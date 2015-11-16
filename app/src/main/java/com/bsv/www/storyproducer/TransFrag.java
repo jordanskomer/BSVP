@@ -9,8 +9,6 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,15 +59,15 @@ public class TransFrag extends Fragment {
         TextView slideNum = (TextView)view.findViewById(R.id.trans_slide_indicator);
         // Setting Story Text
         FileSystem fileSystem = new FileSystem();
-        fileSystem.loadSlideContent(storyName, 1);
+        fileSystem.loadSlideContent(storyName, currentSlide);
         ImageView slideimage = (ImageView)view.findViewById(R.id.trans_image_slide);
-        slideimage.setImageBitmap(fileSystem.getImage(storyName, currentSlide + 1));
+        slideimage.setImageBitmap(fileSystem.getImage(storyName, currentSlide));
         TextView slideTitle = (TextView)view.findViewById(R.id.trans_slide_title_primary);
         slideTitle.setText(fileSystem.getTitle());
         TextView slideSubTitle = (TextView)view.findViewById(R.id.trans_slide_title_secondary);
-        slideSubTitle.setText(fileSystem.getSlideSubTitle());
+        slideSubTitle.setText(fileSystem.getSlideVerse());
         TextView slideVerse = (TextView)view.findViewById(R.id.trans_scripture_title);
-        slideVerse.setText(fileSystem.getSlideSubTitle());
+        slideVerse.setText(fileSystem.getSlideVerse());
         TextView slideContent = (TextView)view.findViewById(R.id.trans_scripture_body);
         slideContent.setText(fileSystem.getSlideContent());
 

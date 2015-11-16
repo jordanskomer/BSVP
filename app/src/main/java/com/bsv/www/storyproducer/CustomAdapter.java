@@ -41,7 +41,7 @@ public class CustomAdapter extends ArrayAdapter<ListFiles> {
             holder = new FileHolder();
             holder.imgIcon = (ImageView)row.findViewById(R.id.story_list_image);
             holder.txtTitle = (TextView)row.findViewById(R.id.story_list_title);
-
+            holder.txtSubTitle = (TextView)row.findViewById(R.id.story_list_subtitle);
             row.setTag(holder);
         }
         else
@@ -53,6 +53,7 @@ public class CustomAdapter extends ArrayAdapter<ListFiles> {
         holder.txtTitle.setText(listFiles.title);
 //        holder.imgIcon.setImageBitmap(listFiles.icon);
         holder.imgIcon.setImageBitmap(getRoundedShape(listFiles.icon));
+        holder.txtSubTitle.setText(listFiles.subtitle);
 
         return row;
     }
@@ -61,6 +62,7 @@ public class CustomAdapter extends ArrayAdapter<ListFiles> {
     {
         ImageView imgIcon;
         TextView txtTitle;
+        TextView txtSubTitle;
     }
 
     public static Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
@@ -91,14 +93,16 @@ public class CustomAdapter extends ArrayAdapter<ListFiles> {
 class ListFiles {
     public Bitmap icon;
     public String title;
+    public String subtitle;
 
     public ListFiles(){
         super();
     }
 
-    public ListFiles(Bitmap icon, String title) {
+    public ListFiles(Bitmap icon, String title, String subtitle) {
         super();
         this.icon = icon;
         this.title = title;
+        this.subtitle = subtitle;
     }
 }

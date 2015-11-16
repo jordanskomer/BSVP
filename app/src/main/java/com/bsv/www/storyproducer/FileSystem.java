@@ -3,9 +3,11 @@ package com.bsv.www.storyproducer;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.widget.Switch;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * Created by hannahbrown on 9/27/15.
@@ -75,6 +77,43 @@ class FileSystem {
         }
         return count;
     }
+
+    String[] content;
+    public void loadSlideContent(String storyName, int slideNum){
+        File file = new File((getPath() + "/" + storyName), (slideNum + ".txt"));
+        StringBuilder text = new StringBuilder();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                text.append(line);
+                text.append('\n');
+            }
+            br.close();
+        }
+        catch (IOException e) {
+            //You'll need to add proper error handling here
+        }
+        content = text.toString().split(Pattern.quote("~"));
+    }
+
+    public String getTitle(){
+        return content[0];
+    }
+    public String getSubTitle(){
+        return content[1];
+    }
+    public String getSlideTitle(){
+        return content[2];
+    }
+    public String getSlideSubTitle(){
+        return content[3];
+    }
+    public String getSlideContent(){
+        return content[4];
+    }
+
 
     private boolean isExternalStorageReadable() {
         String state = Environment.getExternalStorageState();

@@ -16,7 +16,7 @@ class FileSystem {
     private String language = "English";
 
     FileSystem() {}
-    //TODO Ability to change languages
+
     void changeLanguage(String language) {
         this.language = language;
     }
@@ -122,5 +122,40 @@ class FileSystem {
             return true;
         }
         return false;
+    }
+
+    public String[] getText(String story, int number) {
+
+        try {
+            Scanner input = new Scanner(new File(getPath() + "/" + story + "/" + number + ".txt"));
+            String ret = "";
+
+            while (input.hasNext()) {
+                ret += input.nextLine();
+            }
+
+            input.close();
+            return ret.split("~");
+
+        } catch(FileNotFoundException e) {
+            return null;
+        }
+    }
+
+    public String[] getLanguages() {
+        String path = getPath().replace(language, "");
+
+        File f = new File(path);
+        File file[] = f.listFiles();
+        ArrayList<String> list = new ArrayList<>();
+
+        for (int i=0; i < file.length; i++)
+        {
+            if(!file[i].getName().contains(".")) {
+                list.add(file[i].getName());
+            }
+        }
+        String[] temp = new String[list.size()];
+        return list.toArray(temp);
     }
 }

@@ -66,7 +66,6 @@ public class CustomAdapter extends ArrayAdapter<ListFiles> {
     }
 
     public static Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
-        // TODO Auto-generated method stub
         int targetWidth = Math.min(scaleBitmapImage.getWidth(), scaleBitmapImage.getHeight());
         int targetHeight = targetWidth;
         Bitmap targetBitmap = Bitmap.createBitmap(targetWidth,
@@ -95,9 +94,7 @@ class ListFiles {
     public String title;
     public String subtitle;
 
-    public ListFiles(){
-        super();
-    }
+    public ListFiles(){ super(); }
 
     public ListFiles(Bitmap icon, String title, String subtitle) {
         super();

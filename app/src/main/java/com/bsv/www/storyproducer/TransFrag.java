@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 
 public class TransFrag extends Fragment {
@@ -27,7 +28,8 @@ public class TransFrag extends Fragment {
     private static final String NUM_OF_SLIDES = "numofslide";
     private static final String STORY_NAME = "storyname";
     private String outputFile=null;
-    private String fileName = "recording.mp3";
+    private File output = null;
+    private String fileName = "recording";
     private int record_count = 2;
 
     public static TransFrag newInstance(int position, int numOfSlides, String storyName){
@@ -79,8 +81,10 @@ public class TransFrag extends Fragment {
             }
         });
         //stuff for saving and playing the audio
-        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath();
-        outputFile += "/BSVP/" + getArguments().getString(STORY_NAME) + "/" + fileName;
+        //TODO test to see where exacly getPath is in our files and if we even need the directory path
+        output = getContext().getCacheDir();
+        outputFile = output.getPath();
+        outputFile += "/BSVP/" + getArguments().getString(STORY_NAME) + "/" + fileName + SLIDE_NUM + ".mp3";
         final FloatingActionButton floatingActionButton1 = (FloatingActionButton) view.findViewById(R.id.trans_record);
         final FloatingActionButton floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.trans_play);
         floatingActionButton2.setVisibility(View.INVISIBLE);

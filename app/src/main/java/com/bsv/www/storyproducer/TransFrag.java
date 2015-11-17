@@ -94,7 +94,9 @@ public class TransFrag extends Fragment {
             public void onClick(View v) {
             }
         });
+
         //TODO handle an event when you simply click -> it crashes when you do this
+            //hopefully the click function above this does that.
         floatingActionButton1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

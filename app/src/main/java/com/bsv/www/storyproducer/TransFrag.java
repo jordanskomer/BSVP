@@ -82,9 +82,15 @@ public class TransFrag extends Fragment {
         });
         //stuff for saving and playing the audio
         //TODO test to see where exacly getPath is in our files and if we even need the directory path
-        output = getContext().getCacheDir();
-        outputFile = output.getPath();
-        outputFile += "/BSVP/" + getArguments().getString(STORY_NAME) + "/" + fileName + SLIDE_NUM + ".mp3";
+        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() +"/BSVP/";
+        if (new File(outputFile).exists()) {
+            outputFile += getArguments().getString(STORY_NAME) + "/" + fileName + SLIDE_NUM + ".mp3";
+        }
+        else {
+            output = new File(outputFile);
+            outputFile += getArguments().getString(STORY_NAME) + "/" + fileName + SLIDE_NUM + ".mp3";
+        }
+
         final FloatingActionButton floatingActionButton1 = (FloatingActionButton) view.findViewById(R.id.trans_record);
         final FloatingActionButton floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.trans_play);
         floatingActionButton2.setVisibility(View.INVISIBLE);

@@ -120,6 +120,7 @@ public class TransFrag extends Fragment {
                     case MotionEvent.ACTION_CANCEL:
                     case MotionEvent.ACTION_POINTER_DOWN:
                     case MotionEvent.ACTION_POINTER_UP:
+                        v.setPressed(false);
                         Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_LONG).show();
                         stopAudioRecorder(audioRecorder);
                         //keep track of the number of records

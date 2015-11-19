@@ -31,6 +31,7 @@ public class TransFrag extends Fragment {
     private File output = null;
     private String fileName = "recording";
     private int record_count = 2;
+    private int failure;
 
     public static TransFrag newInstance(int position, int numOfSlides, String storyName){
         TransFrag frag = new TransFrag();
@@ -82,24 +83,25 @@ public class TransFrag extends Fragment {
         });
         //stuff for saving and playing the audio
         //TODO test to see where exacly getPath is in our files and if we even need the directory path
-        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() +"/BSVP/";
-        if (new File(outputFile).exists()) {
-            outputFile += getArguments().getString(STORY_NAME) + "/" + fileName + SLIDE_NUM + ".mp3";
+
+//        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/BSVP/";
+        final File output = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +"/BSVP/" +
+                getArguments().getString(STORY_NAME));
+
+        if (output.exists()) {
         }
         else {
-            output = new File(outputFile);
-            outputFile += getArguments().getString(STORY_NAME) + "/" + fileName + SLIDE_NUM + ".mp3";
+            output.mkdirs();
         }
-
         final FloatingActionButton floatingActionButton1 = (FloatingActionButton) view.findViewById(R.id.trans_record);
         final FloatingActionButton floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.trans_play);
         floatingActionButton2.setVisibility(View.INVISIBLE);
 
-        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+        /*floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
-        });
+        });*/
 
         //TODO handle an event when you simply click -> it crashes when you do this
             //hopefully the click function above this does that.
@@ -111,31 +113,35 @@ public class TransFrag extends Fragment {
 
                     case MotionEvent.ACTION_DOWN:
                         v.setPressed(true);
-                        audioRecorder = createAudioRecorder(outputFile);
+                        outputFile = fileName + getArguments().getInt(SLIDE_NUM) + ".mp3";
+                        audioRecorder = createAudioRecorder(output.getAbsolutePath() + "/" + outputFile);
                         startAudioRecorder(audioRecorder);
-                        Toast.makeText(getContext(), "Recording Started", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Recording Started", Toast.LENGTH_SHORT).show();
                         break;
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_OUTSIDE:
                     case MotionEvent.ACTION_CANCEL:
-                    case MotionEvent.ACTION_POINTER_DOWN:
-                    case MotionEvent.ACTION_POINTER_UP:
-                        v.setPressed(false);
-                        Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_SHORT).show();
+                        failure = 1;
                         stopAudioRecorder(audioRecorder);
                         //keep track of the number of records
-                        if (record_count == 2) {
-                            record_count--;
-                            floatingActionButton2.setVisibility(View.VISIBLE);
-
-                        } else if (record_count == 1) {
+                        if (record_count == 2 & failure == 1) {
                             record_count--;
                             floatingActionButton1.setColorNormalResId(R.color.yellow);
-                        } else if (record_count == 0) {
+                            floatingActionButton2.setVisibility(View.VISIBLE);
+                        } else if (record_count == 1 & failure == 1) {
+                            record_count--;
                             floatingActionButton1.setColorNormalResId(R.color.green);
+                        } else if (record_count == 0 & failure == 0) {
+                            record_count++;
+                            floatingActionButton1.setColorNormalResId(R.color.yellow);
                         }
+
+                        v.setPressed(false);
                         break;
                     case MotionEvent.ACTION_MOVE:
+                    case MotionEvent.ACTION_POINTER_DOWN:
+                    case MotionEvent.ACTION_POINTER_UP:
                         break;
 
                 }
@@ -149,7 +155,7 @@ public class TransFrag extends Fragment {
                 MediaPlayer m = new MediaPlayer();
 
                 try {
-                    m.setDataSource(outputFile);
+                    m.setDataSource(output.getAbsolutePath() + "/" + outputFile);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -179,9 +185,14 @@ public class TransFrag extends Fragment {
         }
     }
     private void stopAudioRecorder(MediaRecorder recorder){
-        recorder.stop();
+        try{
+            recorder.stop();
+        }catch(RuntimeException stopException){
+            Toast.makeText(getContext(), "Please record again", Toast.LENGTH_SHORT).show();
+            failure = 0;
+        }
+        recorder.reset();
         recorder.release();
-        //recorder = null;
     }
     private MediaRecorder createAudioRecorder(String fileName){
         MediaRecorder mediaRecorder = new MediaRecorder();

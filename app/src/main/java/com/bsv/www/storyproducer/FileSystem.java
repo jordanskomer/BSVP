@@ -3,9 +3,11 @@ package com.bsv.www.storyproducer;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Xml;
 import android.widget.Switch;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -95,7 +97,26 @@ class FileSystem {
         catch (IOException e) {
             //You'll need to add proper error handling here
         }
+
+
+        String text1 = text.toString();
+        byte[] temp = text1.getBytes();
+        for(int i = 0; i < temp.length; i++) {
+            if(temp[i] == -17) {
+                if(temp[i+1] == -65 && temp[i+2] == -67) {
+                    text = text.replace(i, i+1, "'");
+                    text1 = text.toString();
+                    temp = text1.getBytes();
+                }
+            }
+        }
         content = text.toString().split(Pattern.quote("~"));
+        System.out.println(content[0]);
+        System.out.println(content[1]);
+        System.out.println(content[2]);
+        System.out.println(content[3]);
+
+
     }
 
     public String getTitle(){

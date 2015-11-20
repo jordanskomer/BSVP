@@ -123,8 +123,7 @@ public class TransFrag extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 v.onTouchEvent(event);
-
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (isSpeakButtonLongPressed) {
                         Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_SHORT).show();
                         failure = 1;

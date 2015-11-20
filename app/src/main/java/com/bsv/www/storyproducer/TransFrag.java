@@ -37,6 +37,7 @@ public class TransFrag extends Fragment {
     private String fileName = "recording";
     private int record_count = 2;
     private int failure;
+    private boolean isSpeakButtonLongPressed;
 
     public static TransFrag newInstance(int position, int numOfSlides, String storyName){
         TransFrag frag = new TransFrag();
@@ -79,30 +80,33 @@ public class TransFrag extends Fragment {
         final FloatingActionButton floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.trans_play);
         floatingActionButton2.setVisibility(View.INVISIBLE);
 
-        /*floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
-        });*/
+        });
+
+        floatingActionButton1.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                v.setPressed(true);
+                outputFile = fileName + getArguments().getInt(SLIDE_NUM) + ".mp3";
+                audioRecorder = createAudioRecorder(output.getAbsolutePath() + "/" + outputFile);
+                startAudioRecorder(audioRecorder);
+                Toast.makeText(getContext(), "Recording Started", Toast.LENGTH_SHORT).show();
+                isSpeakButtonLongPressed = true;
+                return true;
+            }
+        });
 
         //TODO handle an event when you simply click -> it crashes when you do this
             //hopefully the click function above this does that.
         floatingActionButton1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
-                switch (event.getAction() & MotionEvent.ACTION_MASK) {
-
-                    case MotionEvent.ACTION_DOWN:
-                        v.setPressed(true);
-                        outputFile = fileName + getArguments().getInt(SLIDE_NUM) + ".mp3";
-                        audioRecorder = createAudioRecorder(output.getAbsolutePath() + "/" + outputFile);
-                        startAudioRecorder(audioRecorder);
-                        Toast.makeText(getContext(), "Recording Started", Toast.LENGTH_SHORT).show();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_OUTSIDE:
-                    case MotionEvent.ACTION_CANCEL:
+                v.onTouchEvent(event);
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (isSpeakButtonLongPressed) {
                         Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_SHORT).show();
                         failure = 1;
                         stopAudioRecorder(audioRecorder);
@@ -118,15 +122,49 @@ public class TransFrag extends Fragment {
                             record_count++;
                             floatingActionButton1.setColorNormalResId(R.color.yellow);
                         }
-
                         v.setPressed(false);
+                        isSpeakButtonLongPressed = false;
+                    }
+                }
+
+                /*switch (event.getAction() & MotionEvent.ACTION_MASK) {
+
+                    case MotionEvent.ACTION_DOWN:
+                        v.setPressed(true);
+                        outputFile = fileName + getArguments().getInt(SLIDE_NUM) + ".mp3";
+                        audioRecorder = createAudioRecorder(output.getAbsolutePath() + "/" + outputFile);
+                        startAudioRecorder(audioRecorder);
+                        Toast.makeText(getContext(), "Recording Started", Toast.LENGTH_SHORT).show();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_OUTSIDE:
+                    case MotionEvent.ACTION_CANCEL:
+                        if (isSpeakButtonLongPressed == false) {
+                            Toast.makeText(getContext(), "Recording Stopped", Toast.LENGTH_SHORT).show();
+                            failure = 1;
+                            stopAudioRecorder(audioRecorder);
+                            //keep track of the number of records
+                            if (record_count == 2 & failure == 1) {
+                                record_count--;
+                                floatingActionButton1.setColorNormalResId(R.color.yellow);
+                                floatingActionButton2.setVisibility(View.VISIBLE);
+                            } else if (record_count == 1 & failure == 1) {
+                                record_count--;
+                                floatingActionButton1.setColorNormalResId(R.color.green);
+                            } else if (record_count == 0 & failure == 0) {
+                                record_count++;
+                                floatingActionButton1.setColorNormalResId(R.color.yellow);
+                            }
+
+                            v.setPressed(false);
+                        }
                         break;
                     case MotionEvent.ACTION_MOVE:
                     case MotionEvent.ACTION_POINTER_DOWN:
                     case MotionEvent.ACTION_POINTER_UP:
                         break;
 
-                }
+                }*/
                 return true;
             }
         });

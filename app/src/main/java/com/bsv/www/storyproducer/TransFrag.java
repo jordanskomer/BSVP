@@ -1,5 +1,6 @@
 package com.bsv.www.storyproducer;
 
+import android.app.ActionBar;
 import android.app.Dialog;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -7,8 +8,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,39 +54,16 @@ public class TransFrag extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+//        getActivity().getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.action_bar_bg_trans));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        int currentSlide = getArguments().getInt(SLIDE_NUM);
-        String storyName = getArguments().getString(STORY_NAME);
         // Inflate the layout for this fragment
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_trans, container, false);
-
-        //Change Slide Number and add on click
-        TextView slideNum = (TextView)view.findViewById(R.id.trans_slide_indicator);
-        // Setting Story Text
-        FileSystem fileSystem = new FileSystem();
-        fileSystem.loadSlideContent(storyName, currentSlide);
-        ImageView slideimage = (ImageView)view.findViewById(R.id.trans_image_slide);
-        slideimage.setImageBitmap(fileSystem.getImage(storyName, currentSlide));
-        TextView slideTitle = (TextView)view.findViewById(R.id.trans_slide_title_primary);
-        slideTitle.setText(fileSystem.getTitle());
-        TextView slideSubTitle = (TextView)view.findViewById(R.id.trans_slide_title_secondary);
-        slideSubTitle.setText(fileSystem.getSlideVerse());
-        TextView slideVerse = (TextView)view.findViewById(R.id.trans_scripture_title);
-        slideVerse.setText(fileSystem.getSlideVerse());
-        TextView slideContent = (TextView)view.findViewById(R.id.trans_scripture_body);
-        slideContent.setText(fileSystem.getSlideContent());
-
-        slideNum.setText("#" + (getArguments().getInt(SLIDE_NUM) + 1));
-        slideNum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchSlideSelectDialog();
-            }
-        });
+        //Load content
+        loadSlideContent(view);
         //stuff for saving and playing the audio
         //TODO test to see where exacly getPath is in our files and if we even need the directory path
 
@@ -213,6 +195,28 @@ public class TransFrag extends Fragment {
         return view;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.menu_play){
+            FileSystem fileSystem = new FileSystem();
+            Snackbar.make(getView(), "Playing Narration Audio...", Snackbar.LENGTH_SHORT).show();
+            MediaPlayer m = new MediaPlayer();
+            try {
+                m.setDataSource(fileSystem.getPath("English") + "/" + getArguments().getString(STORY_NAME) + "/narration" + getArguments().getInt(SLIDE_NUM) + ".wav");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                m.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            m.start();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void startAudioRecorder(MediaRecorder recorder){
         try {
@@ -243,6 +247,38 @@ public class TransFrag extends Fragment {
         return  mediaRecorder;
     }
 
+    private void loadSlideContent(View view){
+        int currentSlide = getArguments().getInt(SLIDE_NUM);
+        String storyName = getArguments().getString(STORY_NAME);
+
+        FileSystem fileSystem = new FileSystem();
+        fileSystem.loadSlideContent(storyName, currentSlide);
+
+        ImageView slideImage = (ImageView)view.findViewById(R.id.trans_image_slide);
+        slideImage.setImageBitmap(fileSystem.getImage(storyName, currentSlide));
+
+        TextView slideTitle = (TextView)view.findViewById(R.id.trans_slide_title_primary);
+        slideTitle.setText(fileSystem.getTitle());
+
+        TextView slideSubTitle = (TextView)view.findViewById(R.id.trans_slide_title_secondary);
+        slideSubTitle.setText(fileSystem.getSlideVerse());
+
+        TextView slideVerse = (TextView)view.findViewById(R.id.trans_scripture_title);
+        slideVerse.setText(fileSystem.getSlideVerse());
+
+        TextView slideContent = (TextView)view.findViewById(R.id.trans_scripture_body);
+        slideContent.setText(fileSystem.getSlideContent());
+
+        TextView slideNum = (TextView)view.findViewById(R.id.trans_slide_indicator);
+        slideNum.setText("#" + (getArguments().getInt(SLIDE_NUM) + 1));
+        slideNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchSlideSelectDialog();
+            }
+        });
+    }
+
     private void launchSlideSelectDialog() {
         final Dialog dialog = new Dialog(getContext());
         int[] slides = new int[getArguments().getInt(NUM_OF_SLIDES)];
@@ -252,7 +288,8 @@ public class TransFrag extends Fragment {
         final DialogListAdapter dialogListAdapter = new DialogListAdapter(getActivity(), slides, getArguments().getInt(SLIDE_NUM));
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_slide_indicator);
-        ListView listView = (ListView)dialog.findViewById(R.id.dialog_listview);
+        dialog.setCanceledOnTouchOutside(true);
+        final ListView listView = (ListView)dialog.findViewById(R.id.dialog_listview);
         listView.setAdapter(dialogListAdapter);
         Button okText = (Button)dialog.findViewById(R.id.dialog_ok);
         Button cancelText = (Button)dialog.findViewById(R.id.dialog_cancel);
@@ -266,7 +303,7 @@ public class TransFrag extends Fragment {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-//                getActivity()
+                ((MainActivity)getActivity()).changeSlide(dialogListAdapter.getSelectedSlide());
             }
         });
         dialog.show();

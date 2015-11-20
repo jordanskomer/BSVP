@@ -35,8 +35,7 @@
         <activity
             android:name="com.bsv.www.storyproducer.SplashScreen"
             android:label="@string/title_activity_splash_screen"
-            android:screenOrientation="portrait"
-            android:theme="@style/SplashScreenTheme">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

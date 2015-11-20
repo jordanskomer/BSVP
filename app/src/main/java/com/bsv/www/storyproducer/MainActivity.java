@@ -1,19 +1,25 @@
 package com.bsv.www.storyproducer;
 
+import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.media.MediaPlayer;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StoryFrag()).commit();
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new StoryFrag()).commit();
+//        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.action_bar_bg_trans, getTheme()));
         setupNavDrawer();
     }
 
@@ -30,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
         if(drawerOpen || hideIcon) {
             menu.findItem(R.id.menu_lang).setVisible(false);
+            menu.findItem(R.id.menu_play).setVisible(true);
         } else {
             menu.findItem(R.id.menu_lang).setVisible(true);
+            menu.findItem(R.id.menu_play).setVisible(false);
         }
         return super.onPrepareOptionsMenu(menu);
     }
@@ -114,11 +125,19 @@ public class MainActivity extends AppCompatActivity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            startFragment(position, 5, "BLANK");
+            if(position == 0) {
+                FragmentManager fm = getFragmentManager();
+                Toast.makeText(getBaseContext(), "In backstack " + fm.getBackStackEntryCount(), Toast.LENGTH_LONG).show();
+                for(int entry = 0; entry < fm.getBackStackEntryCount(); entry++){
+                    Toast.makeText(getBaseContext(), "Found fragment: " + fm.getBackStackEntryAt(entry).getId(), Toast.LENGTH_LONG).show();
+                }
+//                startFragment(position, 0, "");
+            }
             mDrawerLayout.closeDrawer(mDrawerList);
         }
     }
     private boolean hideIcon = false;
+    private PagerFrag pagerFrag;
     public void startFragment(int iFragNum, int slideCount, String storyName){
         String title = "";
         Fragment fragment = null;
@@ -129,12 +148,13 @@ public class MainActivity extends AppCompatActivity {
                 hideIcon = false;
                 break;
             case 1:
-                fragment = PagerFrag.newInstance(slideCount, iFragNum, storyName);
+                pagerFrag = PagerFrag.newInstance(slideCount, iFragNum, storyName);
+                fragment = pagerFrag;
                 title=getApplicationContext().getString(R.string.title_fragment_translate);
                 hideIcon = true;
                 break;
             case 2:
-                fragment = PagerFrag.newInstance(slideCount, iFragNum, storyName);
+                pagerFrag= PagerFrag.newInstance(slideCount, iFragNum, storyName);
                 title=getApplicationContext().getString(R.string.title_fragment_community);
                 hideIcon = true;
                 break;
@@ -146,8 +166,15 @@ public class MainActivity extends AppCompatActivity {
 
         }
         if(fragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment, title).addToBackStack(null).commit();
             mActivityTitle = title;
+            getSupportActionBar().setTitle(title);
+            invalidateOptionsMenu();
+        }
+    }
+    public void changeSlide(int slidePosition){
+        if(pagerFrag != null) {
+            pagerFrag.changeView(slidePosition);
         }
     }
 }

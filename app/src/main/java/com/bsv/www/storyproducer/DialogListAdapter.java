@@ -16,6 +16,7 @@ public class DialogListAdapter extends BaseAdapter  {
     private int[] slides;
     int currentSlide;
     int checkSlide;
+    Boolean firstRun = true;
     private static LayoutInflater inflater;
     Context context;
     public DialogListAdapter(FragmentActivity mainActivity, int[] slides, int currentSlide) {
@@ -49,21 +50,44 @@ public class DialogListAdapter extends BaseAdapter  {
         View view = inflater.inflate(R.layout.dialog_slide_list_item, null);
         TextView textView = (TextView)view.findViewById(R.id.dialog_slide_text);
         final RadioButton radioButton = (RadioButton)view.findViewById(R.id.dialog_radio);
-        if(position == currentSlide){
+        if(position == currentSlide && firstRun){
+            currentlyCheckedRadio = radioButton;
+            currentlyCheckedRadio.setChecked(true);
+            checkSlide = position;
+            firstRun = false;
+        }
+        if(checkSlide == position & !firstRun){
             currentlyCheckedRadio = radioButton;
             currentlyCheckedRadio.setChecked(true);
         }
         textView.setText("Slide " + slides[position]);
-        view.setOnClickListener(new View.OnClickListener() {
+        radioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RadioButton radioButton = (RadioButton)v.findViewById(R.id.dialog_radio);
+                if (currentlyCheckedRadio == radioButton) {
+                    return;
+                }
                 if (currentlyCheckedRadio == null) {
                     currentlyCheckedRadio = radioButton;
                     currentlyCheckedRadio.setChecked(true);
                 }
+                currentlyCheckedRadio.setChecked(false);
+                radioButton.setChecked(true);
+                checkSlide = position;
+                currentlyCheckedRadio = radioButton;
+            }
+        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RadioButton radioButton = (RadioButton)v.findViewById(R.id.dialog_radio);
                 if (currentlyCheckedRadio == radioButton) {
                     return;
+                }
+                if (currentlyCheckedRadio == null) {
+                    currentlyCheckedRadio = radioButton;
+                    currentlyCheckedRadio.setChecked(true);
                 }
                 currentlyCheckedRadio.setChecked(false);
                 radioButton.setChecked(true);

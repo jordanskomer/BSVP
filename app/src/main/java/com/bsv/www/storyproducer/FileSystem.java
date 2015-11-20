@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
  */
 class FileSystem {
     private String language = "English";
+    private int numOfSlides;
 
     FileSystem() {}
 
@@ -61,6 +62,18 @@ class FileSystem {
                 if (file[i].getName().equals(number + ".jpg")) {
                     return BitmapFactory.decodeFile(path + "/" + file[i].getName());
                 }
+        }
+        return null;
+    }
+    public Bitmap getAudio(String story, int number) {
+        String path = getPath() + "/" + story;
+        File f = new File(path);
+        File file[] = f.listFiles();
+
+        for (int i=0; i < file.length; i++) {
+            if (file[i].getName().equals(number + ".jpg")) {
+                return BitmapFactory.decodeFile(path + "/" + file[i].getName());
+            }
         }
         return null;
     }

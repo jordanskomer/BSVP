@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,13 @@ public class CustomAdapter extends ArrayAdapter<ListFiles> {
             holder.imgIcon = (ImageView)row.findViewById(R.id.story_list_image);
             holder.txtTitle = (TextView)row.findViewById(R.id.story_list_title);
             holder.txtSubTitle = (TextView)row.findViewById(R.id.story_list_subtitle);
+            ImageView playButton = (ImageView)row.findViewById(R.id.story_list_play);
+            playButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(v, "DICK", Snackbar.LENGTH_LONG).show();
+                }
+            });
             row.setTag(holder);
         }
         else

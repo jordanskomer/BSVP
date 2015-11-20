@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 /**
@@ -40,7 +41,13 @@ public class StoryFrag extends Fragment{
         CustomAdapter adapter = new CustomAdapter(getContext(), R.layout.story_list_item, listFiles);
 
         listView = (ListView)view.findViewById(R.id.story_list_view);
-
+//        ImageView playVideo = (ImageView)listView.findViewById(R.id.story_list_image);
+//        playVideo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
         // Assign adapter to ListView
         listView.setAdapter(adapter);
 

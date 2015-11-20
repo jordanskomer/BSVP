@@ -111,12 +111,6 @@ class FileSystem {
             }
         }
         content = text.toString().split(Pattern.quote("~"));
-        System.out.println(content[0]);
-        System.out.println(content[1]);
-        System.out.println(content[2]);
-        System.out.println(content[3]);
-
-
     }
 
     public String getTitle(){
